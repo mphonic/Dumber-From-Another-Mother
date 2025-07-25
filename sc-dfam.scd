@@ -208,6 +208,20 @@
 						self.saveSettings(p[0]);
 					}, nil, 1, 1, path: "presets");
 				});
+				Button(dv, 20@20)
+				.states_([["R"], ["O", Color.white, Color.red]])
+				.action_({|v|
+					(v.value == 1).if({
+						s.record(
+							Document.current.dir ++
+							"/recordings/sc-dfam_" ++
+							Date.getDate().stamp ++
+							".aiff"
+						);
+					}, {
+						s.stopRecording;
+					});
+				});
 				self.presetNameView = StaticText(dv, 100@20)
 				.string_("Patch: " ++ (self.presetName ? "default"))
 				.align_(\right);
