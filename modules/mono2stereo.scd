@@ -7,7 +7,7 @@
 		Out.ar(
 			out,
 			Pan2.ar(
-				In.ar(in, 1),
+				LeakDC.ar(In.ar(in, 1)),
 				pan,
 				amp
 			)
