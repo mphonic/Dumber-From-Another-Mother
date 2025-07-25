@@ -15,18 +15,14 @@
 		vOut = 13,
 		pkOut = 32,
 		vkOut = 33|
-		var pseq, vseq, trig, count, mp, mv;
-		trig = Impulse.ar(trigRate) * play + t_advance;
-		pseq = Demand.ar(trig, t_reset, Dseq(p, inf));
-		vseq = Demand.ar(trig, t_reset, Dseq(v, inf));
-		count = Stepper.ar(trig, t_reset, 1, 8, resetval: 0);
-		mp = Select.ar(count - 1, Latch.ar(p, t_repeat + t_advance));
-		mv = Select.ar(count - 1, Latch.ar(v, t_repeat + t_advance));
-		pseq = if(play, pseq, mp);
-		vseq = if(play, vseq, mv);
-		SendReply.ar(trig + t_repeat, '/dfamseq', [count - 1, pseq, vseq, t_advance]);
-		Out.ar(pOut, pseq);
-		Out.ar(vOut, vseq);
+		var pseq, vseq, trig, count;
+		trig = Impulse.kr(trigRate) * play + t_advance;
+		count = Stepper.kr(trig, t_reset, 1, 8, resetval: 0);
+		pseq = Select.kr(count - 1, p);
+		vseq = Select.kr(count - 1, v);
+		SendReply.kr(trig + t_repeat, '/dfamseq', [count - 1, pseq, vseq, t_advance]);
+		Out.ar(pOut, K2A.ar(pseq));
+		Out.ar(vOut, K2A.ar(vseq));
 		Out.kr(pkOut, pseq);
 		Out.kr(vkOut, vseq);
 	}),
