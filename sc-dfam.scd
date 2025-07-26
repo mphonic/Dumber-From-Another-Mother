@@ -157,7 +157,7 @@
 				dv = View(mc, mc.bounds.width@28); // l / s buttons
 				df = FlowLayout(dv.bounds, 0@0, gl@gt);
 				dv.decorator_(df);
-				cv = View(mc, 746@(w.bounds.height - 243)); // controls container
+				cv = View(mc, 746@(w.bounds.height - 150)); // controls container
 				cf = FlowLayout(cv.bounds, 0@0, gl@gt);
 				cv.decorator_(cf);
 				pv = View(mc, 340@(cv.bounds.height)); // patch container
