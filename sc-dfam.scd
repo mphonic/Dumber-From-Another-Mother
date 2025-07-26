@@ -331,7 +331,6 @@
 				settings.keys.do({|key|
 					var module = self.sortedModules.select({|m| m.name == key });
 					(module.size > 0).if({
-						// [key, settings[key]].postln;
 						module[0].setFromSettings(settings[key]);
 					});
 				});
@@ -382,8 +381,7 @@
 		dfam.know = true;
 		dfam.loadSettings(Document.current.dir ++ "/presets/default", {
 			"Settings loaded.".postln;
-			/*{ Window.closeAll }.defer;
-			{ ~makeGui.value }.defer;*/
+			"Ready to go.".postln;
 		});
 		cb.value(dfam);
 	});
