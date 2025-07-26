@@ -3,12 +3,12 @@
 });
 ~mono2Stereo = (
 	parent: ~module,
-	synthDef: SynthDef(\output12, {|in = 32, out = 0, amp = 1.0, pan = 0.0|
+	synthDef: SynthDef(\output12, {|in = 32, out = 0, amp = 1.0, pan = 0.0, panmod = 1|
 		Out.ar(
 			out,
 			Pan2.ar(
 				LeakDC.ar(In.ar(in, 1)),
-				pan,
+				pan + (panmod - 1),
 				amp
 			)
 		);

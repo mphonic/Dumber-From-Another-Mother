@@ -192,7 +192,8 @@
 								'A amp',
 								'SE p',
 								'SE v',
-								'SE play'
+								'SE play',
+								'S pan'
 							]
 						)
 					},
