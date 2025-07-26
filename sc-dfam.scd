@@ -182,7 +182,20 @@
 
 				gui = (
 					matrix: { self.patcher.makeGui(pv) },
-					modpod: { self.modPod.makeGui(mpv, 4) },
+					modpod: {
+						self.modPod.makeGui(
+							mpv,
+							8,
+							[
+								'O1 pitchmod',
+								'O2 pitchmod',
+								'A amp',
+								'SE p',
+								'SE v',
+								'SE play'
+							]
+						)
+					},
 					filt: { self.filt.makeGui(fv, self.style) },
 					osc1: { self.osc1.makeGui(ov, self.style) },
 					osc2: { self.osc2.makeGui(ov, self.style, true, self.osc1) },
@@ -371,6 +384,7 @@
 					{
 						self.presetNameView.string_("Patch: " ++ path.split($/).pop());
 					}.defer;
+					("Settings saved to " ++ path).postln;
 					cb.value(v);
 				});
 			};

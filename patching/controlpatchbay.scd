@@ -118,7 +118,7 @@
 			cb.value(nil);
 		});
 	},
-	getInputKeyFromPatch: {|self, patch, key|
+	getInputKeyFromPatch: {|self, patch|
 		patch[\inputKey];
 	},
 	getNodeFromPatch: {|self, patch|
@@ -126,5 +126,23 @@
 	},
 	getPatchInputId: {|self, patch, key|
 		patch[\id];
-	}
+	},
+	getAllPatches: {|self|
+		var o = self.io[\outputs],
+		patches = List.new;
+		o.keys.do({|k|
+			(o[k][\patches].notNil).if({
+				o[k][\patches].keys.do({|id|
+					var p = o[k][\patches][id];
+					patches.add(Dictionary[
+						\outputKey -> k,
+						\inputKey -> self.getInputKeyFromPatch(p),
+						\id -> id,
+						\patch -> p
+					]);
+				});
+			});
+		});
+		patches;
+	};
 );

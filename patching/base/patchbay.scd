@@ -16,32 +16,36 @@
 			var p = o[key][\patches];
 			(p.notNil).if({
 				var pcount = 0;
-				p.keys.do({|i|
-					var count = 0,
-					v = p[i],
-					cond = Condition.new(false),
-					ps = Dictionary[
-						\outputKey -> key,
-						\inputKey -> self.getInputKeyFromPatch(v, i)
-					];
-					params.do({|param|
-						self.getNodeFromPatch(v).get(param, {|i|
-							ps[param] = i;
-							count = count + 1;
-							(count >= params.size).if({
-								cond.test = true;
-								cond.signal;
+				(p.keys.size > 0).if({
+					p.keys.do({|i|
+						var count = 0,
+						v = p[i],
+						cond = Condition.new(false),
+						ps = Dictionary[
+							\outputKey -> key,
+							\inputKey -> self.getInputKeyFromPatch(v, i)
+						];
+						params.do({|param|
+							self.getNodeFromPatch(v).get(param, {|i|
+								ps[param] = i;
+								count = count + 1;
+								(count >= params.size).if({
+									cond.test = true;
+									cond.signal;
+								});
 							});
 						});
+						{
+							cond.wait;
+							patches.add(ps);
+							pcount = pcount + 1;
+							(pcount >= p.keys.size).if({
+								otest.value;
+							});
+						}.fork;
 					});
-					{
-						cond.wait;
-						patches.add(ps);
-						pcount = pcount + 1;
-						(pcount >= p.keys.size).if({
-							otest.value;
-						});
-					}.fork;
+				}, {
+					otest.value;
 				});
 			}, {
 				otest.value;
