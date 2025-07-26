@@ -95,7 +95,7 @@
 
 			outputs = (
 				modules: [~out, ~v],
-				defaults: [[\out, outputBus]],
+				defaults: [[\out, outputBus, \amp, 0.5]],
 				g: ~groups.outputs
 			);
 			effects = (
@@ -108,6 +108,7 @@
 			);
 			oscs = (
 				modules: [~noise, ~osc2, ~osc1],
+				defaults: [nil, nil, [\fmLevel, 1.0]],
 				g: ~groups.oscs
 			);
 			envs = (
@@ -134,12 +135,6 @@
 			~patcher = ~audioPatchbay.create(~sortedModules);
 			~modPod = ~controlPatchbay.create(~sortedModules, envs.modules);
 			s.sync;
-			// Osc1 has secret FM input with no scaling
-			~osc1.setParams(\fmLevel, 1.0);
-			// Scale down the volume for three signals
-			~out.setParams(\amp, 0.25);
-			// Patch the sequencer amp
-			~modPod.patch("SE vk", "A amp", 1.0);
 
 			~makeGui = {|self, bounds|
 				var w = Window("dfam", bounds ? Rect(80, 250, 1090, 448)),
