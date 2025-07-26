@@ -78,13 +78,12 @@
 		],
 		width = style.calculateViewWidth(pl, gl, 5, ks * 5),
 		height = style.calculateViewHeight(pt, lh, ks),
-		l = Button()
+		l = Button(bounds: bw@bh)
 		.states_([["Lo"], ["Hi"]])
 		.action_({|v|
 			self.switchSynthDef(v.value);
 		})
-		.value_(self.selectedSynthDef ? 0)
-		.fixedSize_(bw@bh),
+		.value_(self.selectedSynthDef ? 0),
 		view = View(parent, width@height),
 		f = FlowLayout(view.bounds, pl@pt, gl@gt);
 		view.decorator_(f);

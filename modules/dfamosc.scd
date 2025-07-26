@@ -160,7 +160,7 @@
 		ne = (canSync).if({ 5 }, { 3 }),
 		width = style.calculateViewWidth(pl, gl, ne, ks * ne),
 		height = style.calculateViewHeight(pt, lh, ks),
-		o = Button()
+		o = Button(bounds: bw@bh)
 		.states_([["/\\"], ["_|"]])
 		.action_({|v|
 			self.switchSynthDef(v.value);
@@ -172,8 +172,7 @@
 		.value_((self.syncedFrom.isNil).if(
 			{ self.selectedSynthDef ? 0 },
 			{ self.lastSelectedSynthDef ? 0 }
-		))
-		.fixedSize_(bw@bh),
+		)),
 		view = View(parent, width@height),
 		f = FlowLayout(view.bounds, pl@pt, gl@gt);
 
@@ -190,7 +189,7 @@
 		style.viewWithTopLabel(view, ks@ks, "Type", o);
 		self.views[\type] = o;
 		(canSync).if({
-			var x = Button()
+			var x = Button(bounds: bw@bh)
 			.states_([["Off"], ["On"]])
 			.action_({|v|
 				(v.value == 0).if({
@@ -199,8 +198,7 @@
 					self.sync(syncSource);
 				});
 			})
-			.value_((self.syncedFrom.notNil).if({ 1 }, { 0 }))
-			.fixedSize_(bw@bh);
+			.value_((self.syncedFrom.notNil).if({ 1 }, { 0 }));
 			style.viewWithTopLabel(view, ks@ks, "Sync", x);
 			self.views[\sync] = x;
 		});

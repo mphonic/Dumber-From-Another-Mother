@@ -50,12 +50,11 @@
 		StaticText(view).string_(self.name).fixedWidth_(ks);
 		f.nextLine;
 		(showAttSwitch && hideAtt).if({
-			var a = Button()
+			var a = Button(bounds: bw@bh)
 			.states_([["S"], ["L"]])
 			.action_({|v|
 				self.setParams(\att, (v.value == 0).if({ 0.01 }, { 0.1 }));
-			})
-			.fixedSize_(bw@bh);
+			});
 			style.viewWithTopLabel(view, ks@ks, "Att", a);
 			self[\controls][\att].get({|v| {
 				(v < 0.1).if({ a.value_(0) }, { a.value_(1) });

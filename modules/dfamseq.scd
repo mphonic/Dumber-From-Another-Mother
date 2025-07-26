@@ -59,13 +59,12 @@
 		bh = style.toggleButtonHeight ? 25,
 		width = 746,
 		height = 175,
-		t = Knob()
+		t = Knob(bounds: ks@ks)
 		.action_({|v|
 			{
 				self.setParams(\trigRate, ControlSpec(1.0, 20, \exp).map(v.value));
 			}.defer;
-		})
-		.fixedSize_(ks@ks),
+		}),
 		r,
 		tb,
 		p,
