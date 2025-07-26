@@ -287,7 +287,7 @@
 				w.onClose_({ self.seq.guiOsc.free });
 
 				CmdPeriod.doOnce { w.close };
-
+				w.view.palette_(QPalette.dark);
 				w.front;
 			};
 

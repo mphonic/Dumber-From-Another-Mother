@@ -75,7 +75,9 @@
 		kview = View(bounds: (view.bounds.width * 0.5)@view.bounds.height),
 		kd = FlowLayout(kview.bounds, 0@0, 0@0),
 		hl = HLayout().margins_(0).spacing_(0),
-		spec = \pan.asSpec;
+		spec = \pan.asSpec,
+		offColor = Color(0.42745098039216, 0.42745098039216, 0.42745098039216),
+		onColor = Color(0.75,0.7,0.7);
 
 		tview.decorator_(td);
 		kview.decorator_(kd);
@@ -142,7 +144,7 @@
 				})
 				.value_(0.5)
 				.fixedSize_(sks@sks);
-				(c == 0).if({ a[c].background_(Color.green) });
+				(c == 0).if({ a[c].background_(onColor) });
 			});
 			kd.nextLine;
 		});
@@ -166,10 +168,10 @@
 				var v = self.views[\v][step],
 				p = self.views[\p][step],
 				prev = self.previousInd ? 0;
-				self.views[\v][prev].background_(Color.white);
-				self.views[\p][prev].background_(Color.white);
-				v.background_(Color.green);
-				p.background_(Color.green);
+				self.views[\v][prev].background_(offColor);
+				self.views[\p][prev].background_(offColor);
+				v.background_(onColor);
+				p.background_(onColor);
 				self.previousInd = step;
 			}.defer;
 		}, '/dfamseq');

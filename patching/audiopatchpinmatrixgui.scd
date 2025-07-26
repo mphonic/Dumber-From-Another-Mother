@@ -77,7 +77,7 @@ extension = (
 			inputs.do({|ikey, x|
 				var isOn = p[ikey].notNil,
 				b = Button()
-				.states_([["", nil, Color.white], ["", nil, Color.blue]])
+				.states_([["", nil, Color.gray], ["", nil, Color(0.75, 0.7, 0.7)]])
 				.action_({|b|
 					(b.value == 0).if({
 						self.unpatch(key, ikey);
