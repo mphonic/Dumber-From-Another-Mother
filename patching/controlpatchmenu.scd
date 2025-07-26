@@ -22,15 +22,21 @@ sortModules = {|modules, dict|
 
 extension = (
 	modView: {|self, parent, inputs, outputs, selected, ignoreInputs, ignoreOutputs|
-		var v = View(parent, 50@60),
-		f = FlowLayout(v.bounds, 0@0, 0@0),
+		var mw = 90,
+		mh = 25,
+		ks = 25,
+		g = 4,
+		v = View(parent, (mw + ks + g)@(mh * 2)),
+		f = FlowLayout(v.bounds, 0@0, g@0),
 		iItems = inputs.asArray,
 		oItems = outputs.asArray,
 		pin,
 		pou,
+		sl,
 		id,
 		input,
-		output;
+		output,
+		spec = \pan.asSpec;
 
 		v.decorator_(f);
 
@@ -47,7 +53,7 @@ extension = (
 			id = selected[2];
 		});
 
-		pin = PopUpMenu(v, 50@20)
+		pin = PopUpMenu(v, mw@mh)
 		.items_([" "] ++ iItems)
 		.action_({|v|
 			var i = v.items[v.value];
@@ -63,13 +69,20 @@ extension = (
 					(id.notNil).if({
 						self.unpatch(output, id);
 					});
-					id = self.patch(output, input);
+					id = self.patch(output, input, spec.map(sl.value));
 				});
 			});
 		})
 		.value_((input.isNil).if({ 0 }, { iItems.indexOf(input) }));
+		sl = Knob(v, ks@ks)
+		.action_({|v|
+			(id.notNil).if({
+				self.setPatch(output, id, spec.map(v.value));
+			});
+		})
+		.value_((selected.isNil).if({ 0.5 }, { selected[3] ? 0.5 }));
 		f.nextLine;
-		pou = PopUpMenu(v, 50@20)
+		pou = PopUpMenu(v, mw@mh)
 		.items_([" "] ++ oItems)
 		.action_({|v|
 			var i = v.items[v.value];
@@ -85,7 +98,7 @@ extension = (
 						self.unpatch(output, id);
 					});
 					output = i;
-					id = self.patch(output, input);
+					id = self.patch(output, input, spec.map(sl.value));
 				}, {
 					output = i;
 				});
@@ -94,14 +107,14 @@ extension = (
 		.value_((output.isNil).if({ 0 }, { oItems.indexOf(output) }));
 		v;
 	},
-	makeGui: {|self, parent|
+	makeGui: {|self, parent, mods = 1|
 		var o = sortModules.value(self.modulators, self.io[\outputs]),
 		i = sortModules.value(self.modules, self.io[\inputs]),
 		view = View(parent, parent.bounds),
 		f = FlowLayout(view.bounds, 0@0, 12@0);
 		view.decorator_(f);
 
-		StaticText(view).string_("Mod Pod");
+		StaticText(view).string_("Mod Pod").fixedWidth_(60);
 		f.nextLine;
 
 		// ignore t_ and i_ rate inputs
@@ -109,7 +122,9 @@ extension = (
 
 		self.views = Dictionary.new;
 		self.views[\modulations] = List.new;
-		self.views[\modulations].add(self.modView(view, i, o));
+		mods.do({
+			self.views[\modulations].add(self.modView(view, i, o));
+		});
 		self.views[\view] = view;
 		view;
 	},

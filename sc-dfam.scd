@@ -182,7 +182,7 @@
 
 				gui = (
 					matrix: { self.patcher.makeGui(pv) },
-					modpod: { self.modPod.makeGui(mpv) },
+					modpod: { self.modPod.makeGui(mpv, 4) },
 					filt: { self.filt.makeGui(fv, self.style) },
 					osc1: { self.osc1.makeGui(ov, self.style) },
 					osc2: { self.osc2.makeGui(ov, self.style, true, self.osc1) },

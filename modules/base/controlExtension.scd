@@ -45,11 +45,11 @@ extension = (
 					\mul, mul,
 					\add, add]); // patch to mod in
 			}, {
-				patchNode = Synth.before(self.node, patchDef, [
+				patchNode = Synth(patchDef, [
 					\in, sourceBus,
 					\out, m[\in],
 					\mul, mul,
-					\add, add]);
+					\add, add], target: self.node.group);
 			});
 			p[id] = patchNode;
 			d[param] = p;
