@@ -141,7 +141,7 @@
 			s.sync;
 
 			~makeGui = {|self, bounds|
-				var w = Window("dfam", bounds ? Rect(80, 250, 1090, 648)),
+				var w = Window("dfam", bounds ? Rect(80, 250, 1090, 553)),
 				pl = self.style.paddingLeft ? 20,
 				pt = self.style.paddingTop ? 20,
 				gl = self.style.gapLeft ? 4,
@@ -157,13 +157,13 @@
 				dv = View(mc, mc.bounds.width@28); // l / s buttons
 				df = FlowLayout(dv.bounds, 0@0, gl@gt);
 				dv.decorator_(df);
-				cv = View(mc, 746@(w.bounds.height - 228)); // controls container
+				cv = View(mc, 746@(w.bounds.height - 243)); // controls container
 				cf = FlowLayout(cv.bounds, 0@0, gl@gt);
 				cv.decorator_(cf);
-				pv = View(mc, 340@(w.bounds.height - 228)); // patch container
+				pv = View(mc, 340@(cv.bounds.height)); // patch container
 				pf = FlowLayout(pv.bounds, 0@0, 0@0);
 				pv.decorator_(pf);
-				mpv = View(mc, w.bounds.width@200); // modpod container
+				mpv = View(mc, w.bounds.width@150); // modpod container
 				mpf = FlowLayout(mpv.bounds, 0@0, 0@0);
 				mpv.decorator_(mpf);
 				ov = View(cv, 358@cvh); // osc container
