@@ -25,7 +25,9 @@
 				"patching/synthdefs",
 				"patching/audiopatchbay",
 				"patching/audiopatchpinmatrixgui",
-				"patching/controlpatchbay"],
+				"patching/controlpatchbay",
+				"patching/controlpatchmenu"
+			],
 			groups = [
 				\outputs,
 				\effects,
@@ -90,6 +92,8 @@
 			});
 
 			groups = ~groups; // we do this for trigFunc closure
+			// trigger func for "outside" use
+			~trigger = { groups.envs.set(\t_gate, 1); };
 
 			s.sync;
 
@@ -137,13 +141,13 @@
 			s.sync;
 
 			~makeGui = {|self, bounds|
-				var w = Window("dfam", bounds ? Rect(80, 250, 1090, 448)),
+				var w = Window("dfam", bounds ? Rect(80, 250, 1090, 648)),
 				pl = self.style.paddingLeft ? 20,
 				pt = self.style.paddingTop ? 20,
 				gl = self.style.gapLeft ? 4,
 				gt = self.style.gapTop ? 4,
 				mc, mf, dv, df, cv, cf, xv, xf, pv, pf, ov, of, fv, ff, sv, sf,
-				cvh = 220,
+				mpv, mpf, cvh = 220,
 				gui;
 
 				w.addFlowLayout(pl@pt, gl@gt);
@@ -153,12 +157,15 @@
 				dv = View(mc, mc.bounds.width@28); // l / s buttons
 				df = FlowLayout(dv.bounds, 0@0, gl@gt);
 				dv.decorator_(df);
-				cv = View(mc, 746@(w.bounds.height - 28)); // controls container
+				cv = View(mc, 746@(w.bounds.height - 228)); // controls container
 				cf = FlowLayout(cv.bounds, 0@0, gl@gt);
 				cv.decorator_(cf);
-				pv = View(mc, 340@(w.bounds.height - 28)); // patch container
+				pv = View(mc, 340@(w.bounds.height - 228)); // patch container
 				pf = FlowLayout(pv.bounds, 0@0, 0@0);
 				pv.decorator_(pf);
+				mpv = View(mc, w.bounds.width@200); // modpod container
+				mpf = FlowLayout(mpv.bounds, 0@0, 0@0);
+				mpv.decorator_(mpf);
 				ov = View(cv, 358@cvh); // osc container
 				of = FlowLayout(ov.bounds, 0@0, 0@0);
 				ov.decorator_(of);
@@ -172,8 +179,10 @@
 				sf = FlowLayout(sv.bounds, 0@0, 0@0);
 				sv.decorator_(sf);
 
+
 				gui = (
 					matrix: { self.patcher.makeGui(pv) },
+					modpod: { self.modPod.makeGui(mpv) },
 					filt: { self.filt.makeGui(fv, self.style) },
 					osc1: { self.osc1.makeGui(ov, self.style) },
 					osc2: { self.osc2.makeGui(ov, self.style, true, self.osc1) },
@@ -276,6 +285,7 @@
 				gui.seq();
 
 				gui.matrix();
+				gui.modpod();
 
 				self.guiWindow = w;
 

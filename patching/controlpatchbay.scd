@@ -69,6 +69,7 @@
 			\inputKey -> inputKey
 		];
 		outputSource[\patches] = patches;
+		id;
 	},
 	unpatch: {|self, outputKey, id|
 		var patch = self.getPatchById(outputKey, id);
