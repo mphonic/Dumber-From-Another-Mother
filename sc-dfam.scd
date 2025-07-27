@@ -6,7 +6,7 @@
 			var docDir = Document.current.dir,
 			base = [
 				"modules/base/module",
-				"modules/base/controlExtension",
+				"modules/base/controlextension",
 				"patching/base/patchbay",
 				"styles/defaults",
 				"styles/helperExtension"
@@ -16,7 +16,7 @@
 				"modules/dfamfilt",
 				"modules/whitenoise",
 				"modules/volume",
-				"modules/softclipVca",
+				"modules/softclipvca",
 				"modules/envperc",
 				"modules/mono2stereo",
 				"modules/dfamseq",
