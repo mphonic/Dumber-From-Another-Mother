@@ -273,9 +273,6 @@
 		o = Dictionary.new,
 		cond = Condition.new(false);
 		o[\selectedSynthDef] = self.selectedSynthDef;
-		/*o[\lastSelectedSynthDef] = self.lastSelectedSynthDef;
-		o[\syncedWith] = (self.syncedWith ? Event.new).name;
-		o[\syncedFrom] = (self.syncedFrom ? Event.new).name;*/
 		c.keys.do({|key|
 			var chan = c[key].numChannels;
 			(chan < 2).if({
@@ -316,7 +313,7 @@
 		(dict[\selectedSynthDef] != self.selectedSynthDef).if({
 			self.switchSynthDef(dict[\selectedSynthDef]);
 		});
-		/*self.lastSelectedSynthDef = dict[\lastSelectedSynthDef];*/
+
 		dict.keys.do({|key|
 			var b = c[key];
 			(b.notNil).if({

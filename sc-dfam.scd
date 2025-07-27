@@ -334,7 +334,7 @@
 				self.patcher.dumpSettings({|v|
 					set[\patcher] = v;
 					ps = ps + 1;
-					(ps >= 2).if({
+					(ps >= 3).if({
 						pc.test = true;
 						pc.signal;
 					});
@@ -342,7 +342,15 @@
 				self.modPod.dumpSettings({|v|
 					set[\modPod] = v;
 					ps = ps + 1;
-					(ps >= 2).if({
+					(ps >= 3).if({
+						pc.test = true;
+						pc.signal;
+					});
+				});
+				self.lfo.dumpSettings({|v|
+					set[\lfo] = v;
+					ps = ps + 1;
+					(ps >= 3).if({
 						pc.test = true;
 						pc.signal;
 					});
@@ -356,7 +364,9 @@
 
 			~setFromSettings = {|self, settings, name = "default"|
 				settings.keys.do({|key|
-					var module = self.sortedModules.select({|m| m.name == key });
+					var module = self.sortedModules.select({|m|
+						m.name == key
+					});
 					(module.size > 0).if({
 						module[0].setFromSettings(settings[key]);
 					});
@@ -364,11 +374,24 @@
 				{
 					// syncable oscs
 					s.sync;
-					self.osc1.setSyncFromSettings(settings[self.osc1.name], self.osc2);
-					self.osc2.setSyncFromSettings(settings[self.osc2.name], self.osc1);
+					self.osc1.setSyncFromSettings(
+						settings[self.osc1.name] ? Dictionary.new,
+						self.osc2
+					);
+					self.osc2.setSyncFromSettings(
+						settings[self.osc2.name] ? Dictionary.new,
+						self.osc1
+					);
 				}.fork;
-				self.patcher.setFromSettings(settings[\patcher]);
-				self.modPod.setFromSettings(settings[\modPod]);
+				self.patcher.setFromSettings(
+					settings[\patcher] ? Dictionary.new
+				);
+				self.modPod.setFromSettings(
+					settings[\modPod] ? Dictionary.new
+				);
+				self.lfo.setFromSettings(
+					settings[\lfo] ? Dictionary.new
+				);
 				(self.guiWindow.notNil).if({
 					{
 						s.sync;

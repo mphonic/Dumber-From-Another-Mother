@@ -68,6 +68,7 @@
 			self.switchSynthDef(v.value);
 		})
 		.value_(self.selectedSynthDef ? 0);
+		self.selectedSynthDef.postln;
 		self.views[\synth] = [m];
 
 		style.viewWithTopLabel(view, ks@ks, "Freq", k);
