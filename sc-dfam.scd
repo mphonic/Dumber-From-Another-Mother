@@ -119,7 +119,7 @@
 				g: ~groups.oscs
 			);
 			envs = (
-				modules: [~vcaEnv, ~filtEnv, ~osc2Env, ~osc1Env, ~seq],
+				modules: [~vcaEnv, ~filtEnv, ~osc2Env, ~osc1Env, ~seq, ~lfo],
 				defaults: [[\att, 0.01]],
 				g: ~groups.envs
 			);
@@ -135,13 +135,12 @@
 				groups.envs.set(\t_gate, 1)
 			});
 			~sortedModules.add(~seq);
-			~lfo.go(nil, groups.envs);
 
 			s.sync;
 			"Synths started".postln;
 
 			~patcher = ~audioPatchbay.create(~sortedModules);
-			~modPod = ~controlPatchbay.create(~sortedModules ++ [~lfo], [~lfo] ++ envs.modules);
+			~modPod = ~controlPatchbay.create(~sortedModules, envs.modules);
 			s.sync;
 
 			~makeGui = {|self, bounds|
@@ -334,7 +333,7 @@
 				self.patcher.dumpSettings({|v|
 					set[\patcher] = v;
 					ps = ps + 1;
-					(ps >= 3).if({
+					(ps >= 2).if({
 						pc.test = true;
 						pc.signal;
 					});
@@ -342,15 +341,7 @@
 				self.modPod.dumpSettings({|v|
 					set[\modPod] = v;
 					ps = ps + 1;
-					(ps >= 3).if({
-						pc.test = true;
-						pc.signal;
-					});
-				});
-				self.lfo.dumpSettings({|v|
-					set[\lfo] = v;
-					ps = ps + 1;
-					(ps >= 3).if({
+					(ps >= 2).if({
 						pc.test = true;
 						pc.signal;
 					});
@@ -388,9 +379,6 @@
 				);
 				self.modPod.setFromSettings(
 					settings[\modPod] ? Dictionary.new
-				);
-				self.lfo.setFromSettings(
-					settings[\lfo] ? Dictionary.new
 				);
 				(self.guiWindow.notNil).if({
 					{
