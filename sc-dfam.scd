@@ -181,7 +181,7 @@
 				gui;
 
 				gui = (
-					matrix: { self.patcher.makeGui(pv) },
+					matrix: { self.patcher.makeGui(pv, nil, ["S"]) },
 					modpod: {
 						self.modPod.makeGui(
 							mpv,

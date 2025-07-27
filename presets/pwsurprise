@@ -349,7 +349,7 @@ p = [
 	// Dictionary
 	116, [ array: o[117],  size: 8 ],  
 	// Array
-	117, [ nil,  nil,  'selectedSynthDef',  0,  
+	117, [ nil,  nil,  'selectedSynthDef',  1,  
 		'pw',  0.5,  'pitchmod',  1.0,  
 		nil,  nil,  nil,  nil,  
 		'amp',  1.0,  nil,  nil,  

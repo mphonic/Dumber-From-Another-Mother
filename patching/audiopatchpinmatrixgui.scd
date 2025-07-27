@@ -19,7 +19,7 @@ sortModules = {|modules, dict|
 	});
 };
 extension = (
-	makeGui: {|self, parent, bs, tw, th, fs|
+	makeGui: {|self, parent, ignoreInputs, ignoreOutputs, bs, tw, th, fs|
 		var g,
 		r = 0,
 		c = 0,
@@ -42,6 +42,21 @@ extension = (
 
 		self.views = Dictionary.new;
 
+		(ignoreInputs.notNil).if({
+			ignoreInputs = ignoreInputs.collect({|v| v.asSymbol });
+			inputs = inputs
+			.collect({|v| v.asSymbol })
+			.select({|v| ignoreInputs.includes(v).not })
+			.collect({|v| v.asString });
+		});
+		(ignoreOutputs.notNil).if({
+			ignoreOutputs = ignoreOutputs.collect({|v| v.asSymbol });
+			outputs = outputs
+			.collect({|v| v.asSymbol })
+			.select({|v| ignoreOutputs.includes(v).not })
+			.collect({|v| v.asString });
+		});
+
 		g = GridLayout().margins_(0).spacing_(0);
 		numCols = inputs.size;
 		g.add(nil, r, c);
@@ -60,7 +75,6 @@ extension = (
 			);
 		});
 		r = 1;
-		outputs.pop();
 		outputs.do({|key, i|
 			var h = HLayout().margins_(0).spacing_(0),
 			p = o[key][\patches] ? Dictionary.new;
