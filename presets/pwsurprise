@@ -19,12 +19,13 @@ o = [
 	Dictionary.prNew,  Array.prNew(16),  "A",  "F",  
 	Dictionary.prNew,  Array.prNew(16),  "S",  "A",  
 	Dictionary.prNew,  Array.prNew(32),  Dictionary.prNew,  Array.prNew(32),  
-	Dictionary.prNew,  Array.prNew(32),  List.prNew,  Array.prNew(7),  
-	Dictionary.prNew,  Array.prNew(16),  "A amp",  "SE vk",  
+	Dictionary.prNew,  Array.prNew(32),  List.prNew,  Array.prNew(8),  
+	Dictionary.prNew,  Array.prNew(16),  "S panmod",  "LFO",  
 	Dictionary.prNew,  Array.prNew(16),  "O1 pitchmod",  "SE pk",  
 	Dictionary.prNew,  Array.prNew(16),  "SE trigrate",  Dictionary.prNew,  
 	Array.prNew(16),  "S panmod",  Dictionary.prNew,  Array.prNew(16),  
 	"O2 pw",  Dictionary.prNew,  Array.prNew(16),  "O2 pitchmod",  
+	Dictionary.prNew,  Array.prNew(16),  "A amp",  "SE vk",  
 	Dictionary.prNew,  Array.prNew(16),  "O2 pw",  "EA k",  
 	Dictionary.prNew,  Array.prNew(32),  Dictionary.prNew,  Array.prNew(32),  
 	Dictionary.prNew,  Array.prNew(32),  Array.prNew(8),  Array.prNew(8),  
@@ -42,16 +43,16 @@ p = [
 		'E1',  o[72],  nil,  nil,  
 		'O1',  o[74],  nil,  nil,  
 		'M1',  o[76],  'modPod',  o[78],  
-		'EF',  o[104],  nil,  nil,  
+		'EF',  o[108],  nil,  nil,  
 		nil,  nil,  nil,  nil,  
-		'A',  o[106],  'SE',  o[108],  
-		nil,  nil,  'O2',  o[112],  
-		nil,  nil,  'MN',  o[114],  
+		'A',  o[110],  'SE',  o[112],  
+		nil,  nil,  'O2',  o[116],  
+		nil,  nil,  'MN',  o[118],  
 		nil,  nil,  nil,  nil,  
 		nil,  nil,  nil,  nil,  
-		'E2',  o[116],  nil,  nil,  
-		nil,  nil,  'M2',  o[118],  
-		nil,  nil,  'EA',  o[120] ],  
+		'E2',  o[120],  nil,  nil,  
+		nil,  nil,  'M2',  o[122],  
+		nil,  nil,  'EA',  o[124] ],  
 	// Dictionary
 	2, [ array: o[3],  size: 3 ],  
 	// Array
@@ -249,13 +250,13 @@ p = [
 	78, [ array: o[79] ],  
 	// Array
 	79, [ o[80],  o[84],  o[88],  o[91],  
-		o[94],  o[97],  o[100] ],  
+		o[94],  o[97],  o[100],  o[104] ],  
 	// Dictionary
 	80, [ array: o[81],  size: 4 ],  
 	// Array
 	81, [ nil,  nil,  nil,  nil,  
 		'inputKey',  o[82],  'add',  0.0,  
-		'mul',  1.0,  nil,  nil,  
+		'mul',  -0.33807063102722,  nil,  nil,  
 		'outputKey',  o[83],  nil,  nil ],  
 	// Dictionary
 	84, [ array: o[85],  size: 4 ],  
@@ -297,12 +298,19 @@ p = [
 	// Array
 	101, [ nil,  nil,  nil,  nil,  
 		'inputKey',  o[102],  'add',  0.0,  
-		'mul',  0.79369735717773,  nil,  nil,  
+		'mul',  1.0,  nil,  nil,  
 		'outputKey',  o[103],  nil,  nil ],  
 	// Dictionary
 	104, [ array: o[105],  size: 4 ],  
 	// Array
 	105, [ nil,  nil,  nil,  nil,  
+		'inputKey',  o[106],  'add',  0.0,  
+		'mul',  0.79369735717773,  nil,  nil,  
+		'outputKey',  o[107],  nil,  nil ],  
+	// Dictionary
+	108, [ array: o[109],  size: 4 ],  
+	// Array
+	109, [ nil,  nil,  nil,  nil,  
 		nil,  nil,  'att',  0.0,  
 		nil,  nil,  'dec',  0.87422239780426,  
 		nil,  nil,  nil,  nil,  
@@ -311,9 +319,9 @@ p = [
 		't_gate',  0.0,  nil,  nil,  
 		nil,  nil,  nil,  nil ],  
 	// Dictionary
-	106, [ array: o[107],  size: 1 ],  
+	110, [ array: o[111],  size: 1 ],  
 	// Array
-	107, [ nil,  nil,  nil,  nil,  
+	111, [ nil,  nil,  nil,  nil,  
 		nil,  nil,  nil,  nil,  
 		nil,  nil,  nil,  nil,  
 		'amp',  1.0,  nil,  nil,  
@@ -322,26 +330,26 @@ p = [
 		nil,  nil,  nil,  nil,  
 		nil,  nil,  nil,  nil ],  
 	// Dictionary
-	108, [ array: o[109],  size: 7 ],  
+	112, [ array: o[113],  size: 7 ],  
 	// Array
-	109, [ 't_advance',  0.0,  nil,  nil,  
+	113, [ 't_advance',  0.0,  nil,  nil,  
 		nil,  nil,  nil,  nil,  
 		nil,  nil,  'play',  1.0,  
-		'v',  o[110],  'trigRate',  5.283670425415,  
-		nil,  nil,  'p',  o[111],  
+		'v',  o[114],  'trigRate',  5.283670425415,  
+		nil,  nil,  'p',  o[115],  
 		nil,  nil,  't_reset',  0.0,  
 		't_repeat',  0.0,  nil,  nil,  
 		nil,  nil,  nil,  nil ],  
 	// Array
-	110, [ 1.0,  -1.0,  -0.47710034251213,  -1.0,  
+	114, [ 1.0,  -1.0,  -0.47710034251213,  -1.0,  
 		-0.76295971870422,  0.91316622495651,  -1.0,  0.52460044622421 ],  
 	// Array
-	111, [ 0.075399547815323,  0.98536175489426,  0.43102550506592,  -0.39357495307922,  
+	115, [ 0.075399547815323,  0.98536175489426,  0.43102550506592,  -0.39357495307922,  
 		0.32542717456818,  0.19073639810085,  0.60000002384186,  -0.63807064294815 ],  
 	// Dictionary
-	112, [ array: o[113],  size: 8 ],  
+	116, [ array: o[117],  size: 8 ],  
 	// Array
-	113, [ nil,  nil,  'selectedSynthDef',  0,  
+	117, [ nil,  nil,  'selectedSynthDef',  0,  
 		'pw',  0.5,  'pitchmod',  1.0,  
 		nil,  nil,  nil,  nil,  
 		'amp',  1.0,  nil,  nil,  
@@ -350,9 +358,9 @@ p = [
 		nil,  nil,  'lastSelectedSynthDef',  1,  
 		nil,  nil,  nil,  nil ],  
 	// Dictionary
-	114, [ array: o[115],  size: 1 ],  
+	118, [ array: o[119],  size: 1 ],  
 	// Array
-	115, [ nil,  nil,  nil,  nil,  
+	119, [ nil,  nil,  nil,  nil,  
 		nil,  nil,  nil,  nil,  
 		nil,  nil,  nil,  nil,  
 		'amp',  0.083261199295521,  nil,  nil,  
@@ -361,9 +369,9 @@ p = [
 		nil,  nil,  nil,  nil,  
 		nil,  nil,  nil,  nil ],  
 	// Dictionary
-	116, [ array: o[117],  size: 4 ],  
+	120, [ array: o[121],  size: 4 ],  
 	// Array
-	117, [ nil,  nil,  nil,  nil,  
+	121, [ nil,  nil,  nil,  nil,  
 		nil,  nil,  'att',  0.0,  
 		nil,  nil,  'dec',  0.014297117479146,  
 		nil,  nil,  nil,  nil,  
@@ -372,9 +380,9 @@ p = [
 		't_gate',  0.0,  nil,  nil,  
 		nil,  nil,  nil,  nil ],  
 	// Dictionary
-	118, [ array: o[119],  size: 1 ],  
+	122, [ array: o[123],  size: 1 ],  
 	// Array
-	119, [ nil,  nil,  nil,  nil,  
+	123, [ nil,  nil,  nil,  nil,  
 		nil,  nil,  nil,  nil,  
 		nil,  nil,  nil,  nil,  
 		'amp',  0.25,  nil,  nil,  
@@ -383,9 +391,9 @@ p = [
 		nil,  nil,  nil,  nil,  
 		nil,  nil,  nil,  nil ],  
 	// Dictionary
-	120, [ array: o[121],  size: 4 ],  
+	124, [ array: o[125],  size: 4 ],  
 	// Array
-	121, [ nil,  nil,  nil,  nil,  
+	125, [ nil,  nil,  nil,  nil,  
 		nil,  nil,  'att',  0.0099999997764826,  
 		nil,  nil,  'dec',  3.6093230247498,  
 		nil,  nil,  nil,  nil,  

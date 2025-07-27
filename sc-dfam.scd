@@ -19,7 +19,8 @@
 				"modules/softclipVca",
 				"modules/envperc",
 				"modules/mono2stereo",
-				"modules/dfamseq"
+				"modules/dfamseq",
+				"modules/multilfo"
 			],
 			patching = [
 				"patching/synthdefs",
@@ -59,7 +60,8 @@
 				~envPerc,
 				~softclipVca,
 				~mono2Stereo,
-				~dfamSeq
+				~dfamSeq,
+				~multilfo
 			].do({|e, c|
 				(e.isNil).if({ c.postln; }); // debug
 				e.sendSynthDefs();
@@ -79,6 +81,7 @@
 			~filtEnv = ~envPerc.create('EF');
 			~vcaEnv = ~envPerc.create('EA');
 			~seq = ~dfamSeq.create('SE');
+			~lfo = ~multilfo.create('LFO');
 
 			s.sync;
 			"Modules created".postln;
@@ -132,12 +135,13 @@
 				groups.envs.set(\t_gate, 1)
 			});
 			~sortedModules.add(~seq);
+			~lfo.go(nil, groups.envs);
 
 			s.sync;
 			"Synths started".postln;
 
 			~patcher = ~audioPatchbay.create(~sortedModules);
-			~modPod = ~controlPatchbay.create(~sortedModules, envs.modules);
+			~modPod = ~controlPatchbay.create(~sortedModules ++ [~lfo], [~lfo] ++ envs.modules);
 			s.sync;
 
 			~makeGui = {|self, bounds|
@@ -146,39 +150,35 @@
 				pt = self.style.paddingTop ? 20,
 				gl = self.style.gapLeft ? 4,
 				gt = self.style.gapTop ? 4,
-				mc, mf, dv, df, cv, cf, xv, xf, pv, pf, ov, of, fv, ff, sv, sf,
-				mpv, mpf, cvh = 220,
+				f = w.addFlowLayout(pl@pt, gl@gt),
+				cvh = 220,
+				mc = View(w, w.bounds), // main container
+				mf = mc.addFlowLayout(0@0, 0@0),
+
+				dv = View(mc, mc.bounds.width@28), // l / s buttons
+				df = dv.addFlowLayout(0@0, gl@gt),
+
+				cv = View(mc, 746@(w.bounds.height - 150)), // controls container
+				cf = cv.addFlowLayout(0@0, gl@gt),
+
+				pv = View(mc, 340@(cv.bounds.height)), // patch container
+				pf = pv.addFlowLayout(0@0, 0@0),
+
+				mpv = View(mc, w.bounds.width@150), // modpod container
+				mpf = mpv.addFlowLayout(0@0, 0@0),
+
+				ov = View(cv, 358@cvh), // osc container
+				of = ov.addFlowLayout(0@0, 0@0),
+
+				xv = View(cv, 50@cvh), // mixer container
+				xf = xv.addFlowLayout(0@0, 0@0),
+
+				fv = View(cv, 330@cvh), // filt container
+				ff = fv.addFlowLayout(0@0, 0@0),
+
+				sv = View(cv, cv.bounds.width@cvh), // sequence container
+				sf = sv.addFlowLayout(0@0, 0@0),
 				gui;
-
-				w.addFlowLayout(pl@pt, gl@gt);
-				mc = View(w, w.bounds); // main container
-				mf = FlowLayout(mc.bounds, 0@0, 0@0);
-				mc.decorator_(mf);
-				dv = View(mc, mc.bounds.width@28); // l / s buttons
-				df = FlowLayout(dv.bounds, 0@0, gl@gt);
-				dv.decorator_(df);
-				cv = View(mc, 746@(w.bounds.height - 150)); // controls container
-				cf = FlowLayout(cv.bounds, 0@0, gl@gt);
-				cv.decorator_(cf);
-				pv = View(mc, 340@(cv.bounds.height)); // patch container
-				pf = FlowLayout(pv.bounds, 0@0, 0@0);
-				pv.decorator_(pf);
-				mpv = View(mc, w.bounds.width@150); // modpod container
-				mpf = FlowLayout(mpv.bounds, 0@0, 0@0);
-				mpv.decorator_(mpf);
-				ov = View(cv, 358@cvh); // osc container
-				of = FlowLayout(ov.bounds, 0@0, 0@0);
-				ov.decorator_(of);
-				xv = View(cv, 50@cvh); // mixer container
-				xf = FlowLayout(xv.bounds, 0@0, 0@0);
-				xv.decorator_(xf);
-				fv = View(cv, 330@cvh); // filt container
-				ff = FlowLayout(fv.bounds, 0@0, 0@0);
-				fv.decorator_(ff);
-				sv = View(cv, cv.bounds.width@cvh); // sequence container
-				sf = FlowLayout(sv.bounds, 0@0, 0@0);
-				sv.decorator_(sf);
-
 
 				gui = (
 					matrix: { self.patcher.makeGui(pv) },
@@ -208,7 +208,8 @@
 					mix2: { self.osc2Mix.makeGui(xv, self.style) },
 					mixN: { self.noiseMix.makeGui(xv, self.style) },
 					m2s: { self.out.makeGui(fv, self.style) },
-					seq: { self.seq.makeGui(sv, self.style) }
+					seq: { self.seq.makeGui(sv, self.style) },
+					lfo: { self.lfo.makeGui(sv, self.style) },
 				);
 
 				// load / save
@@ -262,6 +263,8 @@
 				gui.filtEnv();
 				gui.vcaEnv();
 				gui.m2s();
+
+				gui.lfo();
 
 				View(sv, 80@60).layout_(VLayout(
 					StaticText()

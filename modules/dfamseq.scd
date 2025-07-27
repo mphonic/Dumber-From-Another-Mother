@@ -46,6 +46,12 @@
 			});
 		}, '/dfamseq');
 	},
+	customSetFromSettings: {|self, dict, cb|
+		// Uncomment to stop / reset sequencer on preset load
+		// self.setParams(\play, 0);
+		// self.node.set(\t_reset, 1);
+		cb.value(dict);
+	},
 	makeGui: {|self, parent, styles|
 		var style = styles ? Event.new,
 		ks = style.knobSize ? 50,
@@ -57,8 +63,6 @@
 		lh = style.lineHeight ? 11,
 		bw = style.toggleButtonWidth ? 50,
 		bh = style.toggleButtonHeight ? 25,
-		width = 746,
-		height = 175,
 		t = Knob(bounds: ks@ks)
 		.action_({|v|
 			{
@@ -68,18 +72,15 @@
 		r,
 		tb,
 		p,
-		view = View(parent, (parent.bounds.width - 80)@parent.bounds.height),
-		tview = View(bounds: (view.bounds.width * 0.5)@view.bounds.height),
-		td = FlowLayout(tview.bounds, 0@0, 4@4),
-		kview = View(bounds: (view.bounds.width * 0.5)@view.bounds.height),
-		kd = FlowLayout(kview.bounds, 0@0, 0@0),
-		hl = HLayout().margins_(0).spacing_(0),
+		view = View(parent, (parent.bounds.width - 155)@parent.bounds.height),
+		f = view.addFlowLayout(0@0, 0@0),
+		tview = View(view, (view.bounds.width * 0.3)@view.bounds.height),
+		td = tview.addFlowLayout(0@0, 4@4),
+		kview = View(view, (view.bounds.width * 0.7)@view.bounds.height),
+		kd = kview.addFlowLayout(0@0, 0@0),
 		spec = \pan.asSpec,
 		offColor = Color(0.42745098039216, 0.42745098039216, 0.42745098039216),
 		onColor = Color(0.75,0.7,0.7);
-
-		tview.decorator_(td);
-		kview.decorator_(kd);
 
 		self.views = Dictionary.new;
 		/*StaticText(view).string_(self.name).fixedWidth_(ks);
@@ -129,55 +130,57 @@
 			StaticText(kview, 40@(lh + 4)).string_(labels[i]);
 			kd.nextLine;
 			8.do({|c|
-				a[c] = Knob(kview)
-				.action_({|v|
-					{
-						self[\controls][params[i]].getn(8, {|val|
-							{
-								val[c] = spec.map(v.value);
-								// self.node.setn(params[i], val);
-								self[\controls][params[i]].setn(val);
-							}.defer
-						});
-					}.defer;
-				})
-				.value_(0.5)
-				.fixedSize_(sks@sks);
-				(c == 0).if({ a[c].background_(onColor) });
+				a[c] = [
+					Knob(kview)
+					.action_({|v|
+						{
+							self[\controls][params[i]].getn(8, {|val|
+								{
+									val[c] = spec.map(v.value);
+									// self.node.setn(params[i], val);
+									self[\controls][params[i]].setn(val);
+								}.defer
+							});
+						}.defer;
+					})
+					.value_(0.5)
+					.fixedSize_(sks@sks),
+					spec];
+				(c == 0).if({ a[c][0].background_(onColor) });
 			});
 			kd.nextLine;
 		});
 		self[\controls][\p].getn(8, {|v|
 			{
 				v.do({|e, c|
-					self.views[\p][c].value_(spec.unmap(e));
+					self.views[\p][c][0].value_(spec.unmap(e));
 				});
 			}.defer;
 		});
 		self[\controls][\v].getn(8, {|v|
 			{
 				v.do({|e, c|
-					self.views[\v][c].value_(spec.unmap(e));
+					self.views[\v][c][0].value_(spec.unmap(e));
 				});
 			}.defer;
 		});
 		self.guiOsc = OSCFunc({|msg|
 			var step = (msg[3] ? 0).max(0);
 			{
-				var v = self.views[\v][step],
-				p = self.views[\p][step],
+				var v = self.views[\v][step][0],
+				p = self.views[\p][step][0],
 				prev = self.previousInd ? 0;
-				self.views[\v][prev].background_(offColor);
-				self.views[\p][prev].background_(offColor);
+				self.views[\v][prev][0].background_(offColor);
+				self.views[\p][prev][0].background_(offColor);
 				v.background_(onColor);
 				p.background_(onColor);
 				self.previousInd = step;
 			}.defer;
 		}, '/dfamseq');
 
-		hl.add(tview);
+		/*hl.add(tview);
 		hl.add(kview);
-		view.layout_(hl);
+		view.layout_(hl);*/
 		self.views[\view] = view;
 		view;
 	}

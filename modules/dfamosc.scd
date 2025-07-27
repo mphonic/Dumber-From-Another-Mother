@@ -174,7 +174,7 @@
 			{ self.lastSelectedSynthDef ? 0 }
 		)),
 		view = View(parent, width@height),
-		f = FlowLayout(view.bounds, pl@pt, gl@gt);
+		f = view.addFlowLayout(pl@pt, gl@gt);
 
 		self.views = Dictionary.new;
 

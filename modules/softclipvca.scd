@@ -24,7 +24,7 @@
 		width = style.calculateViewWidth(pl, gl, ne, ks * ne),
 		height = style.calculateViewHeight(pt, lh, ks),
 		view = View(parent, width@height),
-		f = FlowLayout(view.bounds, pl@pt, gl@gt),
+		f = view.addFlowLayout(pl@pt, gl@gt),
 		spec = \amp.asSpec,
 		k = Knob()
 		.action_({|v|
@@ -34,7 +34,6 @@
 		self.views = Dictionary.new;
 		self.views[\amp] = [k, spec];
 
-		view.decorator_(f);
 		StaticText(view).string_(self.name).fixedWidth_(ks);
 		style.viewWithTopLabel(view, ks@ks, "Amp", k);
 		self[\controls][\amp].get({|v| { k.value_(spec.unmap(v)) }.defer });

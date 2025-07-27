@@ -40,11 +40,10 @@
 		width = style.calculateViewWidth(pl, gl, ne, ks * ne),
 		height = style.calculateViewHeight(pt, lh, ks),
 		view = View(parent, width@height),
-		f = FlowLayout(view.bounds, pl@pt, gl@gt);
+		f = view.addFlowLayout(pl@pt, gl@gt);
 
 		self.views = Dictionary.new;
 
-		view.decorator_(f);
 		(hideAtt).if({ knobConf.removeAt(0) });
 
 		StaticText(view).string_(self.name).fixedWidth_(ks);

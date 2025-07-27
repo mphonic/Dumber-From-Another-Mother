@@ -22,7 +22,7 @@
 		width = style.calculateViewWidth(pl, gl, ne, ks * ne),
 		height = style.calculateViewHeight(pt, lh, ks + lh),
 		view = View(parent, width@height),
-		f = FlowLayout(view.bounds, pl@pt, gl@gt),
+		f = view.addFlowLayout(pl@pt, gl@gt),
 		spec = \amp.asSpec,
 		k = Knob()
 		.action_({|v|
@@ -33,7 +33,6 @@
 		self.views = Dictionary.new;
 		self.views[\amp] = [k, spec];
 
-		view.decorator_(f);
 		style.viewWithTopLabel(view, ks@(ks * 2), self.name, k);
 		self[\controls][\amp].get({|v| { k.value_(spec.unmap(v)) }.defer });
 		self.views[\view] = view;

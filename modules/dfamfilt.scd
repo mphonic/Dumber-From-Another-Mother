@@ -85,8 +85,7 @@
 		})
 		.value_(self.selectedSynthDef ? 0),
 		view = View(parent, width@height),
-		f = FlowLayout(view.bounds, pl@pt, gl@gt);
-		view.decorator_(f);
+		f = view.addFlowLayout(pl@pt, gl@gt);
 
 		self.views = Dictionary.new;
 		self.views[\mode] = l;
