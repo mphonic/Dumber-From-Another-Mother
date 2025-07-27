@@ -175,8 +175,13 @@
 				fv = View(cv, 330@cvh), // filt container
 				ff = fv.addFlowLayout(0@0, 0@0),
 
-				sv = View(cv, cv.bounds.width@cvh), // sequence container
+				sv = View(cv, cv.bounds.width@cvh), // lower container
 				sf = sv.addFlowLayout(0@0, 0@0),
+
+				lv, // lfo container
+				lf,
+
+				sc, // sequence container
 				gui;
 
 				gui = (
@@ -207,7 +212,7 @@
 					mix2: { self.osc2Mix.makeGui(xv, self.style) },
 					mixN: { self.noiseMix.makeGui(xv, self.style) },
 					m2s: { self.out.makeGui(fv, self.style) },
-					seq: { self.seq.makeGui(sv, self.style) },
+					seq: { self.seq.makeGui(sc, self.style) },
 					lfo: { self.lfo.makeGui(sv, self.style) },
 				);
 
@@ -265,39 +270,44 @@
 
 				gui.lfo();
 
-				View(sv, 80@60).layout_(VLayout(
-					StaticText()
-					.string_("Map Pitch"),
-					Button()
-					.states_([["O1 off"], ["O1 on"]])
-					.action_({|v|
-						{
-							(v.value == 1).if({
-								self.modPod.patch("SE pk", "O1 pitchmod");
-							},  {
-								self.modPod.unpatch("SE pk", "SE pk2O1 pitchmod");
-							});
-						}.defer
-					})
-					.value_((self.modPod.getPatchById("SE pk", "SE pk2O1 pitchmod").notNil).if({
-						1 },
-					{ 0 }))
-					.fixedSize_(60@20),
-					Button()
-					.states_([["O2 off"], ["O2 on"]])
-					.action_({|v|
-						{
-							(v.value == 1).if({
-								self.modPod.patch("SE pk", "O2 pitchmod");
-							},  {
-								self.modPod.unpatch("SE pk", "SE pk2O2 pitchmod");
-							});
-						}.defer
-					})
-					.value_((self.modPod.getPatchById("SE pk", "SE pk2O2 pitchmod").notNil).if({ 1 }, { 0 }))
-					.fixedSize_(60@20)
-				).margins_(0).spacing_(0)
-				);
+				lv = View(sv, (self.lfo[\views][\view].bounds.width + 12)@(sv.bounds.height));
+				lf = lv.addFlowLayout(pl@pt, gl@gt);
+
+				// seq to oscs
+				StaticText(lv).fixedWidth_(50)
+				.string_("Map Pitch");
+				lf.nextLine;
+				Button(lv, 50@20)
+				.states_([["O1 off"], ["O1 on"]])
+				.action_({|v|
+					{
+						(v.value == 1).if({
+							self.modPod.patch("SE pk", "O1 pitchmod");
+						},  {
+							self.modPod.unpatch("SE pk", "SE pk2O1 pitchmod");
+						});
+					}.defer
+				})
+				.value_((self.modPod.getPatchById("SE pk", "SE pk2O1 pitchmod").notNil).if({
+					1 },
+				{ 0 }));
+				lf.nextLine;
+				Button(lv, 50@20)
+				.states_([["O2 off"], ["O2 on"]])
+				.action_({|v|
+					{
+						(v.value == 1).if({
+							self.modPod.patch("SE pk", "O2 pitchmod");
+						},  {
+							self.modPod.unpatch("SE pk", "SE pk2O2 pitchmod");
+						});
+					}.defer
+				})
+				.value_((self.modPod.getPatchById("SE pk", "SE pk2O2 pitchmod").notNil).if({ 1 }, { 0 }));
+
+				sc = View(sv, (sv.bounds.width - (self.lfo[\views][\view].bounds.width + lv.bounds.width))@(sv.bounds.height));
+				sc.addFlowLayout(pl@0, 0@0);
+
 				gui.seq();
 
 				gui.matrix();

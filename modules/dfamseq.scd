@@ -46,10 +46,15 @@
 			});
 		}, '/dfamseq');
 	},
+	stopOnSettingsChange: false,
+	resetOnSettingsChange: false,
+	stopAndResetOnSettingsChange: {|self, b|
+		self.stopOnSettingsChange = b;
+		self.resetOnSettingsChange = b;
+	},
 	customSetFromSettings: {|self, dict, cb|
-		// Uncomment to stop / reset sequencer on preset load
-		// self.setParams(\play, 0);
-		// self.node.set(\t_reset, 1);
+		(self.stopOnSettingsChange).if({ self.setParams(\play, 0) });
+		(self.resetOnSettingsChange).if({ self.node.set(\t_reset, 1); });
 		cb.value(dict);
 	},
 	makeGui: {|self, parent, styles|
@@ -72,11 +77,11 @@
 		r,
 		tb,
 		p,
-		view = View(parent, (parent.bounds.width - 155)@parent.bounds.height),
+		view = View(parent, (parent.bounds.width)@parent.bounds.height),
 		f = view.addFlowLayout(0@0, 0@0),
-		tview = View(view, (view.bounds.width * 0.3)@view.bounds.height),
+		tview = View(view, (view.bounds.width * 0.25)@view.bounds.height),
 		td = tview.addFlowLayout(0@0, 4@4),
-		kview = View(view, (view.bounds.width * 0.7)@view.bounds.height),
+		kview = View(view, (view.bounds.width * 0.75)@view.bounds.height),
 		kd = kview.addFlowLayout(0@0, 0@0),
 		spec = \pan.asSpec,
 		offColor = Color(0.42745098039216, 0.42745098039216, 0.42745098039216),
