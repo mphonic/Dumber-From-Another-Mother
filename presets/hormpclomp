@@ -162,7 +162,7 @@ p = [
 	// Dictionary
 	18, [ array: o[19],  size: 2 ],  
 	// Array
-	19, [ nil,  nil,  'selectedSynthDef',  4,  
+	19, [ nil,  nil,  'selectedSynthDef',  6,  
 		nil,  nil,  nil,  nil,  
 		nil,  nil,  nil,  nil,  
 		nil,  nil,  nil,  nil,  

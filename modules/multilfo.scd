@@ -4,30 +4,30 @@
 ~multilfo = (
 	parent: ~module,
 	synthDef: [
-		SynthDef(\lftri, {|freq = 4,
-			out = 0|
+		SynthDef(\lftri, {|freq = 4, out = 0|
 			Out.kr(out, LFTri.kr(freq));
 		}),
-		SynthDef(\lfpulse, {|freq = 4,
-			out = 0|
+		SynthDef(\lfpulse, {|freq = 4, out = 0|
 			Out.kr(out, LFPulse.kr(freq));
 		}),
-		SynthDef(\lfsaw, {|freq = 4,
-			out = 0|
+		SynthDef(\lfsaw, {|freq = 4, out = 0|
 			Out.kr(out, LFSaw.kr(freq));
 		}),
-		SynthDef(\lfsh, {|freq = 4,
-			out = 0|
+		SynthDef(\lfsh, {|freq = 4, out = 0|
 			Out.kr(out, LFDNoise0.kr(freq).lag(0.02));
 		}),
-		SynthDef(\lfnoise, {|freq = 4,
-			out = 0|
+		SynthDef(\lfnoise, {|freq = 4, out = 0|
 			Out.kr(out, LFDNoise3.kr(freq));
 		}),
-		SynthDef(\lfdust, {|freq = 4,
-			out = 0|
+		SynthDef(\lfdust, {|freq = 4, out = 0|
 			var trig = Dust.kr(freq);
 			Out.kr(out, Latch.kr(trig, trig).lag(0.02) * 2 - 1);
+		}),
+		SynthDef(\trigff, {|t_gate, out = 0|
+			Out.kr(out, ToggleFF.kr(t_gate) * 2 - 1);
+		}),
+		SynthDef(\trigrand, {|t_gate, out = 0|
+			Out.kr(out, TRand.kr(-1.0, 1.0, t_gate));
 		})
 	],
 	outputConfig: Dictionary[\out -> \k],
@@ -47,7 +47,7 @@
 		k = Knob()
 		.action_({|v|
 			self.setParams(\freq, spec.map(v.value));
-		}),
+		}).enabled_([6, 7].includes(self.selectedSynthDef).not),
 		m;
 
 		self.views = Dictionary.new;
@@ -62,10 +62,17 @@
 			"Saw",
 			"SH",
 			"LF Noise",
-			"Dust"
+			"Dust",
+			"Trig FF",
+			"Trig Rand"
 		])
 		.action_({|v|
 			self.switchSynthDef(v.value);
+			[6, 7].includes(v.value).if({
+				k.enabled_(false);
+			}, {
+				k.enabled_(true);
+			});
 		})
 		.value_(self.selectedSynthDef ? 0);
 		self.views[\synth] = [m];
