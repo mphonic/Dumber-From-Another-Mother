@@ -27,6 +27,8 @@ o = OSCFunc({|msg|
 		});
 	});
 }, '/dfamseq');
+~dfam1.seq.node.set(\t_reset, 1);
+~dfam2.seq.node.set(\t_reset, 1);
 ~dfam1.seq.setParams(\play, 1);
 )
 o.free
@@ -53,6 +55,8 @@ o = OSCFunc({|msg|
 		count = count + 1;
 	});
 }, '/dfamseq');
+~dfam1.seq.node.set(\t_reset, 1);
+~dfam2.seq.node.set(\t_reset, 1);
 ~dfam1.seq.setParams(\play, 1);
 )
 o.free
@@ -79,6 +83,8 @@ o = OSCFunc({|msg|
 		count = count + 1;
 	});
 }, '/dfamseq');
+~dfam1.seq.node.set(\t_reset, 1);
+~dfam2.seq.node.set(\t_reset, 1);
 ~dfam1.seq.setParams(\play, 1);
 )
 o.free
