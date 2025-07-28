@@ -261,8 +261,12 @@
 						0.09.wait;
 					}
 				});
+				self.guiTask.play;
 			});
 		});
+	},
+	stopSyncGui: {|self|
+		self.guiTask !? {|v| v.stop };
 	},
 	dumpControls: {|self|
 		self.controls.keys.asArray;
