@@ -322,6 +322,18 @@
 				w.front;
 			};
 
+			~syncGui = {|self|
+				self.sortedModules.do({|e|
+					(e.name != 'SE').if({ e.syncGui(); });
+				});
+			};
+
+			~stopSyncGui = {|self|
+				self.sortedModules.do({|e|
+					e.stopSyncGui();
+				});
+			};
+
 			~dumpSettings = {|self, cb|
 				var set = Dictionary.new,
 				modules = self.sortedModules,
