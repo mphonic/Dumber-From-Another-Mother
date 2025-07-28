@@ -20,13 +20,14 @@ o = [
 	"A env",  "EA",  Dictionary.prNew,  Array.prNew(16),  
 	"A",  "F",  Dictionary.prNew,  Array.prNew(16),  
 	"S",  "A",  Dictionary.prNew,  Array.prNew(32),  
-	Dictionary.prNew,  Array.prNew(32),  List.prNew,  Array.prNew(4),  
+	Dictionary.prNew,  Array.prNew(32),  List.prNew,  Array.prNew(5),  
 	Dictionary.prNew,  Array.prNew(16),  "M1 amp",  "LFO",  
-	Dictionary.prNew,  Array.prNew(16),  "M2 amp",  Dictionary.prNew,  
-	Array.prNew(16),  "O2 pw",  "SE pk",  Dictionary.prNew,  
-	Array.prNew(16),  "A amp",  "SE vk",  Dictionary.prNew,  
-	Array.prNew(32),  Dictionary.prNew,  Array.prNew(32),  Dictionary.prNew,  
-	Array.prNew(32),  Dictionary.prNew,  Array.prNew(32)
+	Dictionary.prNew,  Array.prNew(16),  "F ffreq",  Dictionary.prNew,  
+	Array.prNew(16),  "M2 amp",  Dictionary.prNew,  Array.prNew(16),  
+	"O2 pw",  "SE pk",  Dictionary.prNew,  Array.prNew(16),  
+	"A amp",  "SE vk",  Dictionary.prNew,  Array.prNew(32),  
+	Dictionary.prNew,  Array.prNew(32),  Dictionary.prNew,  Array.prNew(32),  
+	Dictionary.prNew,  Array.prNew(32)
 ];
 p = [
 	// Dictionary
@@ -56,14 +57,14 @@ p = [
 		'M1',  o[80],  'modPod',  o[82],  
 		nil,  nil,  nil,  nil,  
 		nil,  nil,  nil,  nil,  
-		'A',  o[99],  nil,  nil,  
-		nil,  nil,  'O2',  o[101],  
+		'A',  o[102],  nil,  nil,  
+		nil,  nil,  'O2',  o[104],  
 		nil,  nil,  nil,  nil,  
 		nil,  nil,  nil,  nil,  
 		nil,  nil,  nil,  nil,  
 		nil,  nil,  nil,  nil,  
-		nil,  nil,  'M2',  o[103],  
-		nil,  nil,  'EA',  o[105] ],  
+		nil,  nil,  'M2',  o[106],  
+		nil,  nil,  'EA',  o[108] ],  
 	// Dictionary
 	2, [ array: o[3],  size: 3 ],  
 	// Array
@@ -94,7 +95,7 @@ p = [
 		nil,  nil,  nil,  nil,  
 		'amp',  1.0,  nil,  nil,  
 		nil,  nil,  'envLevel',  0.47710034251213,  
-		'fmLevel',  1.0,  'freq',  164.81378173828,  
+		'fmLevel',  1.0,  'freq',  45.0,  
 		nil,  nil,  'lastSelectedSynthDef',  0,  
 		nil,  nil,  nil,  nil ],  
 	// Dictionary
@@ -162,7 +163,7 @@ p = [
 	20, [ array: o[21],  size: 6 ],  
 	// Array
 	21, [ nil,  nil,  'selectedSynthDef',  0,  
-		'ffreq',  184.9972076416,  nil,  nil,  
+		'ffreq',  45.0,  nil,  nil,  
 		nil,  nil,  nil,  nil,  
 		'amp',  1.0,  'res',  0.28855016827583,  
 		nil,  nil,  'envLevel',  0.49829921126366,  
@@ -299,7 +300,8 @@ p = [
 	// List
 	82, [ array: o[83] ],  
 	// Array
-	83, [ o[84],  o[88],  o[91],  o[95] ],  
+	83, [ o[84],  o[88],  o[91],  o[94],  
+		o[98] ],  
 	// Dictionary
 	84, [ array: o[85],  size: 4 ],  
 	// Array
@@ -312,48 +314,55 @@ p = [
 	// Array
 	89, [ nil,  nil,  nil,  nil,  
 		'inputKey',  o[90],  'add',  0.0,  
-		'mul',  0.70170080661774,  nil,  nil,  
+		'mul',  0.37539955973625,  nil,  nil,  
 		'outputKey',  o[87],  nil,  nil ],  
 	// Dictionary
 	91, [ array: o[92],  size: 4 ],  
 	// Array
 	92, [ nil,  nil,  nil,  nil,  
 		'inputKey',  o[93],  'add',  0.0,  
-		'mul',  1.0,  nil,  nil,  
-		'outputKey',  o[94],  nil,  nil ],  
+		'mul',  0.70170080661774,  nil,  nil,  
+		'outputKey',  o[87],  nil,  nil ],  
 	// Dictionary
-	95, [ array: o[96],  size: 4 ],  
+	94, [ array: o[95],  size: 4 ],  
 	// Array
-	96, [ nil,  nil,  nil,  nil,  
-		'inputKey',  o[97],  'add',  0.0,  
+	95, [ nil,  nil,  nil,  nil,  
+		'inputKey',  o[96],  'add',  0.0,  
 		'mul',  1.0,  nil,  nil,  
-		'outputKey',  o[98],  nil,  nil ],  
+		'outputKey',  o[97],  nil,  nil ],  
 	// Dictionary
-	99, [ array: o[100],  size: 1 ],  
+	98, [ array: o[99],  size: 4 ],  
 	// Array
-	100, [ nil,  nil,  nil,  nil,  
+	99, [ nil,  nil,  nil,  nil,  
+		'inputKey',  o[100],  'add',  0.0,  
+		'mul',  1.0,  nil,  nil,  
+		'outputKey',  o[101],  nil,  nil ],  
+	// Dictionary
+	102, [ array: o[103],  size: 1 ],  
+	// Array
+	103, [ nil,  nil,  nil,  nil,  
 		nil,  nil,  nil,  nil,  
 		nil,  nil,  nil,  nil,  
-		'amp',  0.61162942647934,  nil,  nil,  
+		'amp',  0.413828343153,  nil,  nil,  
 		nil,  nil,  nil,  nil,  
 		nil,  nil,  nil,  nil,  
 		nil,  nil,  nil,  nil,  
 		nil,  nil,  nil,  nil ],  
 	// Dictionary
-	101, [ array: o[102],  size: 8 ],  
+	104, [ array: o[105],  size: 8 ],  
 	// Array
-	102, [ nil,  nil,  'selectedSynthDef',  1,  
+	105, [ nil,  nil,  'selectedSynthDef',  1,  
 		'pw',  0.5,  'pitchmod',  1.0,  
 		nil,  nil,  nil,  nil,  
 		'amp',  1.0,  nil,  nil,  
 		nil,  nil,  'envLevel',  0.41401818394661,  
-		'fmLevel',  0.00052439438877627,  'freq',  164.81378173828,  
+		'fmLevel',  0.00052439438877627,  'freq',  45.0,  
 		nil,  nil,  'lastSelectedSynthDef',  1,  
 		nil,  nil,  nil,  nil ],  
 	// Dictionary
-	103, [ array: o[104],  size: 1 ],  
+	106, [ array: o[107],  size: 1 ],  
 	// Array
-	104, [ nil,  nil,  nil,  nil,  
+	107, [ nil,  nil,  nil,  nil,  
 		nil,  nil,  nil,  nil,  
 		nil,  nil,  nil,  nil,  
 		'amp',  0.25,  nil,  nil,  
@@ -362,11 +371,11 @@ p = [
 		nil,  nil,  nil,  nil,  
 		nil,  nil,  nil,  nil ],  
 	// Dictionary
-	105, [ array: o[106],  size: 4 ],  
+	108, [ array: o[109],  size: 4 ],  
 	// Array
-	106, [ nil,  nil,  nil,  nil,  
+	109, [ nil,  nil,  nil,  nil,  
 		nil,  nil,  'att',  0.0099999997764826,  
-		nil,  nil,  'dec',  0.4285714328289,  
+		nil,  nil,  'dec',  0.40000000596046,  
 		nil,  nil,  nil,  nil,  
 		nil,  nil,  'curve',  -4.0,  
 		nil,  nil,  nil,  nil,  

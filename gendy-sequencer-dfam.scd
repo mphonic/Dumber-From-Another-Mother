@@ -13,7 +13,7 @@ g = {|minfreq = 6, maxfreq = 12, drift = 0.2, steps = 16|
 	t = HPZ2.kr(p);
 	v = Select.kr(
 		PulseCount.kr(t) - 1 % steps,
-		TBrownRand.kr(0.0, 1.0 ! 12, drift, 1, trig: t)
+		TBrownRand.kr(0.0, 1.0 ! 16, drift, 1, trig: t)
 	).squared;
 	SendReply.kr(t, '/xseq', [p, v]);
 }.play;
@@ -55,8 +55,8 @@ g.set(\steps, 6);
 g.set(\steps, 2);
 g.set(\steps, 16);
 // see what's happening by syncing the GUI
-~dfam.osc1.syncGui(); ~dfam.osc2.syncGui(); ~dfam.filt.syncGui();
+~dfam.syncGui();
 // stop syncing the GUI
-~dfam.osc1.stopSyncGui(); ~dfam.osc2.stopSyncGui(); ~dfam.filt.stopSyncGui();
+~dfam.stopSyncGui();
 // stop the silliness, but keep the dfam running
 g.free; o.free;
