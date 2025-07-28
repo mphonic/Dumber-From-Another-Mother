@@ -36,8 +36,9 @@
 		self.trigFunc = trigFunc;
 		self.responder = OSCFunc({|msg|
 			var v = msg[msg.size - 2],
-			a = msg[msg.size - 1];
-			(v > -0.7).if({
+			a = msg[msg.size - 1],
+			n = msg[1];
+			((n == self.node.nodeID).and(v > -0.7)).if({
 				(a.notNil).if({
 					(a < 1).if({ self.trigFunc(msg) });
 				}, {
@@ -170,17 +171,19 @@
 			}.defer;
 		});
 		self.guiOsc = OSCFunc({|msg|
-			var step = (msg[3] ? 0).max(0);
-			{
-				var v = self.views[\v][step][0],
-				p = self.views[\p][step][0],
-				prev = self.previousInd ? 0;
-				self.views[\v][prev][0].background_(offColor);
-				self.views[\p][prev][0].background_(offColor);
-				v.background_(onColor);
-				p.background_(onColor);
-				self.previousInd = step;
-			}.defer;
+			(msg[1] == self.node.nodeID).if({
+				var step = (msg[3] ? 0).max(0);
+				{
+					var v = self.views[\v][step][0],
+					p = self.views[\p][step][0],
+					prev = self.previousInd ? 0;
+					self.views[\v][prev][0].background_(offColor);
+					self.views[\p][prev][0].background_(offColor);
+					v.background_(onColor);
+					p.background_(onColor);
+					self.previousInd = step;
+				}.defer;
+			});
 		}, '/dfamseq');
 
 		/*hl.add(tview);
