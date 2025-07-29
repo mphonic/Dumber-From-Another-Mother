@@ -215,6 +215,13 @@
 					seq: { self.seq.makeGui(sc, self.style) },
 					lfo: { self.lfo.makeGui(sv, self.style) },
 				);
+				// Donate please
+				Button(dv, 75@20)
+				.states_([["Donate"]])
+				.action_({
+					"open https://github.com/mphonic/SC-DFAM/blob/master/README.md#donate".unixCmd();
+"explorer https://github.com/mphonic/SC-DFAM/blob/master/README.md#donate".unixCmd();
+				});
 
 				// load / save
 				Button(dv, 20@20)
