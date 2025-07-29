@@ -14,27 +14,32 @@
 ~dfam2.makeGui();
 )
 
+// Lil bit o' latency never hurt no one
 ( // First DFAM plays and causes second to advance
 o = OSCFunc({|msg|
 	var v = msg[msg.size - 2],
 	a = msg[msg.size - 1];
 	(msg[1] == ~dfam1.seq.node.nodeID).if({
 		(v > -0.7).if({
-			(a.notNil).if({
-				(a < 1).if({
+			s.bind({
+				(a.notNil).if({
+					(a < 1).if({
+						~dfam2.trigger();
+						~dfam2.seq.setParams(\t_advance, 1);
+					});
+				}, {
 					~dfam2.trigger();
-					~dfam2.seq.node.set(\t_advance, 1);
+					~dfam2.seq.setParams(\t_advance, 1);
 				});
-			}, {
-				~dfam2.trigger();
-				~dfam2.seq.node.set(\t_advance, 1);
 			});
 		});
 	});
 }, '/dfamseq');
-~dfam1.seq.node.set(\t_reset, 1);
-~dfam2.seq.node.set(\t_reset, 1);
-~dfam1.seq.setParams(\play, 1);
+s.bind({
+	~dfam1.seq.setParams(\t_reset, 1);
+	~dfam2.seq.setParams(\t_reset, 1);
+	~dfam1.seq.setParams(\play, 1);
+});
 )
 o.free
 
@@ -46,23 +51,27 @@ o = OSCFunc({|msg|
 	(msg[1] == ~dfam1.seq.node.nodeID).if({
 		(count.even).if({
 			(v > -0.7).if({
-				(a.notNil).if({
-					(a < 1).if({
+				s.bind({
+					(a.notNil).if({
+						(a < 1).if({
+							~dfam2.trigger();
+							~dfam2.seq.setParams(\t_advance, 1);
+						});
+					}, {
 						~dfam2.trigger();
-						~dfam2.seq.node.set(\t_advance, 1);
+						~dfam2.seq.setParams(\t_advance, 1);
 					});
-				}, {
-					~dfam2.trigger();
-					~dfam2.seq.node.set(\t_advance, 1);
 				});
 			});
 		});
 		count = count + 1;
 	});
 }, '/dfamseq');
-~dfam1.seq.node.set(\t_reset, 1);
-~dfam2.seq.node.set(\t_reset, 1);
-~dfam1.seq.setParams(\play, 1);
+s.bind({
+	~dfam1.seq.setParams(\t_reset, 1);
+	~dfam2.seq.setParams(\t_reset, 1);
+	~dfam1.seq.setParams(\play, 1);
+});
 )
 o.free
 
@@ -75,14 +84,16 @@ o = OSCFunc({|msg|
 	(msg[1] == ~dfam1.seq.node.nodeID).if({
 		(count % 3 == 0).if({
 			(v > -0.7).if({
-				(a.notNil).if({
-					(a < 1).if({
+				s.bind({
+					(a.notNil).if({
+						(a < 1).if({
+							~dfam2.trigger();
+							~dfam2.seq.setParams(\t_advance, 1);
+						});
+					}, {
 						~dfam2.trigger();
-						~dfam2.seq.node.set(\t_advance, 1);
+						~dfam2.seq.setParams(\t_advance, 1);
 					});
-				}, {
-					~dfam2.trigger();
-					~dfam2.seq.node.set(\t_advance, 1);
 				});
 			});
 			beats = beats + 1;
@@ -92,8 +103,10 @@ o = OSCFunc({|msg|
 		count = count + 1;
 	});
 }, '/dfamseq');
-~dfam1.seq.node.set(\t_reset, 1);
-~dfam2.seq.node.set(\t_reset, 1);
-~dfam1.seq.setParams(\play, 1);
+s.bind({
+	~dfam1.seq.setParams(\t_reset, 1);
+	~dfam2.seq.setParams(\t_reset, 1);
+	~dfam1.seq.setParams(\play, 1);
+});
 )
 o.free

@@ -31,12 +31,14 @@ r = Routine({
 				a = params[2].value,
 				d = params[3].value,
 				i = ~dfam;
-				i.osc1.setParams(\freq, f);
-				i.osc2.setParams(\freq, f);
-				i.filt.setParams(\ffreq, ff);
-				i.v.setParams(\amp, a);
-				i.vcaEnv.setParams(\dec, d);
-				(a > 0.5).if({ i.trigger(); });
+				s.bind({
+					i.osc1.setParams(\freq, f);
+					i.osc2.setParams(\freq, f);
+					i.filt.setParams(\ffreq, ff);
+					i.v.setParams(\amp, a);
+					i.vcaEnv.setParams(\dec, d);
+					(a > 0.5).if({ i.trigger(); });
+				});
 			});
 			(60/4/t).wait;
 		});
