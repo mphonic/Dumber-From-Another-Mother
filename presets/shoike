@@ -116,10 +116,10 @@ p = [
 	11, [ 't_advance',  0.0,  nil,  nil,  
 		nil,  nil,  nil,  nil,  
 		nil,  nil,  'play',  0.0,  
-		'v',  o[12],  'trigRate',  7.0092167854309,  
+		'v',  o[12],  nil,  nil,  
 		nil,  nil,  'p',  o[13],  
 		nil,  nil,  't_reset',  0.0,  
-		't_repeat',  0.0,  nil,  nil,  
+		't_repeat',  0.0,  'tempo',  7.0092167854309,  
 		nil,  nil,  nil,  nil ],  
 	// Array
 	12, [ 1.0,  0.37539955973625,  0.12289965897799,  1.0,  

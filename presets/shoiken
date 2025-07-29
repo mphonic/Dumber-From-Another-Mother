@@ -25,11 +25,11 @@ o = [
 	Array.prNew(16),  "S panmod",  "LFO",  Dictionary.prNew,  
 	Array.prNew(16),  "F amp",  Dictionary.prNew,  Array.prNew(16),  
 	"O2 pitchmod",  "SE pk",  Dictionary.prNew,  Array.prNew(16),  
-	"SE trigrate",  Dictionary.prNew,  Array.prNew(16),  "EA dec",  
+	"SE tempo",  Dictionary.prNew,  Array.prNew(16),  "EA dec",  
 	Dictionary.prNew,  Array.prNew(16),  "A amp",  "SE vk",  
-	Dictionary.prNew,  Array.prNew(16),  "SE trigrate",  Dictionary.prNew,  
-	Array.prNew(32),  Dictionary.prNew,  Array.prNew(32),  Dictionary.prNew,  
-	Array.prNew(32),  Dictionary.prNew,  Array.prNew(32)
+	Dictionary.prNew,  Array.prNew(16),  Dictionary.prNew,  Array.prNew(32),  
+	Dictionary.prNew,  Array.prNew(32),  Dictionary.prNew,  Array.prNew(32),  
+	Dictionary.prNew,  Array.prNew(32)
 ];
 p = [
 	// Dictionary
@@ -59,14 +59,14 @@ p = [
 		'M1',  o[83],  'modPod',  o[85],  
 		nil,  nil,  nil,  nil,  
 		nil,  nil,  nil,  nil,  
-		'A',  o[111],  nil,  nil,  
-		nil,  nil,  'O2',  o[113],  
+		'A',  o[110],  nil,  nil,  
+		nil,  nil,  'O2',  o[112],  
 		nil,  nil,  nil,  nil,  
 		nil,  nil,  nil,  nil,  
 		nil,  nil,  nil,  nil,  
 		nil,  nil,  nil,  nil,  
-		nil,  nil,  'M2',  o[115],  
-		nil,  nil,  'EA',  o[117] ],  
+		nil,  nil,  'M2',  o[114],  
+		nil,  nil,  'EA',  o[116] ],  
 	// Dictionary
 	2, [ array: o[3],  size: 3 ],  
 	// Array
@@ -117,10 +117,10 @@ p = [
 	11, [ 't_advance',  0.0,  nil,  nil,  
 		nil,  nil,  nil,  nil,  
 		nil,  nil,  'play',  1.0,  
-		'v',  o[12],  'trigRate',  7.0092167854309,  
+		'v',  o[12],  nil,  nil,  
 		nil,  nil,  'p',  o[13],  
 		nil,  nil,  't_reset',  0.0,  
-		't_repeat',  0.0,  nil,  nil,  
+		't_repeat',  0.0,  'tempo',  7.0092167854309,  
 		nil,  nil,  nil,  nil ],  
 	// Array
 	12, [ 1.0,  0.37539955973625,  0.12289965897799,  1.0,  
@@ -357,13 +357,13 @@ p = [
 	108, [ array: o[109],  size: 4 ],  
 	// Array
 	109, [ nil,  nil,  nil,  nil,  
-		'inputKey',  o[110],  'add',  0.0,  
+		'inputKey',  o[100],  'add',  0.0,  
 		'mul',  0.0,  nil,  nil,  
 		'outputKey',  o[107],  nil,  nil ],  
 	// Dictionary
-	111, [ array: o[112],  size: 1 ],  
+	110, [ array: o[111],  size: 1 ],  
 	// Array
-	112, [ nil,  nil,  nil,  nil,  
+	111, [ nil,  nil,  nil,  nil,  
 		nil,  nil,  nil,  nil,  
 		nil,  nil,  nil,  nil,  
 		'amp',  1.0,  nil,  nil,  
@@ -372,9 +372,9 @@ p = [
 		nil,  nil,  nil,  nil,  
 		nil,  nil,  nil,  nil ],  
 	// Dictionary
-	113, [ array: o[114],  size: 8 ],  
+	112, [ array: o[113],  size: 8 ],  
 	// Array
-	114, [ nil,  nil,  'selectedSynthDef',  1,  
+	113, [ nil,  nil,  'selectedSynthDef',  1,  
 		'pw',  0.5,  'pitchmod',  1.0,  
 		nil,  nil,  nil,  nil,  
 		'amp',  1.0,  nil,  nil,  
@@ -383,9 +383,9 @@ p = [
 		nil,  nil,  'lastSelectedSynthDef',  0,  
 		nil,  nil,  nil,  nil ],  
 	// Dictionary
-	115, [ array: o[116],  size: 1 ],  
+	114, [ array: o[115],  size: 1 ],  
 	// Array
-	116, [ nil,  nil,  nil,  nil,  
+	115, [ nil,  nil,  nil,  nil,  
 		nil,  nil,  nil,  nil,  
 		nil,  nil,  nil,  nil,  
 		'amp',  0.55778294801712,  nil,  nil,  
@@ -394,9 +394,9 @@ p = [
 		nil,  nil,  nil,  nil,  
 		nil,  nil,  nil,  nil ],  
 	// Dictionary
-	117, [ array: o[118],  size: 4 ],  
+	116, [ array: o[117],  size: 4 ],  
 	// Array
-	118, [ nil,  nil,  nil,  nil,  
+	117, [ nil,  nil,  nil,  nil,  
 		nil,  nil,  'att',  0.0099999997764826,  
 		nil,  nil,  'dec',  0.1048054844141,  
 		nil,  nil,  nil,  nil,  

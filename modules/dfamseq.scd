@@ -6,7 +6,7 @@
 	parent: ~module,
 	synthDef: SynthDef(\dfamSeq, {|p = #[0, 0, 0, 0, 0, 0, 0, 0],
 		v = #[0, 0, 0, 0, 0, 0, 0, 0],
-		trigRate = 2,
+		tempo = 2,
 		play = 0,
 		t_advance = 0,
 		t_repeat = 0,
@@ -16,7 +16,7 @@
 		pkOut = 32,
 		vkOut = 33|
 		var pseq, vseq, trig, count;
-		trig = Impulse.kr(trigRate) * play + t_advance;
+		trig = Impulse.kr(tempo) * play + t_advance;
 		count = Stepper.kr(trig, t_reset, 1, 8, resetval: 0);
 		pseq = Select.kr(count - 1, p);
 		vseq = Select.kr(count - 1, v);
@@ -73,7 +73,7 @@
 		t = Knob(bounds: ks@ks)
 		.action_({|v|
 			{
-				self.setParams(\trigRate, tSpec.map(v.value));
+				self.setParams(\tempo, tSpec.map(v.value));
 			}.defer;
 		}),
 		r,
@@ -93,10 +93,10 @@
 		/*StaticText(view).string_(self.name).fixedWidth_(ks);
 		f.nextLine;*/
 		style.viewWithTopLabel(tview, ks@(ks + lh), "Tempo", t);
-		self[\controls][\trigRate].get({|v|
+		self[\controls][\tempo].get({|v|
 			{ t.value_(tSpec.unmap(v)) }.defer
 		});
-		self.views[\trigRate] = [t, tSpec];
+		self.views[\tempo] = [t, tSpec];
 		td.nextLine;
 		tb = Button(tview, bw@bh)
 		.states_([["Trigger"]])
