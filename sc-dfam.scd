@@ -67,7 +67,7 @@
 				e.sendSynthDefs();
 			});
 
-			~out = ~mono2Stereo.create('S');
+			~out = ~mono2Stereo.create('O');
 			~v = ~softclipVca.create('A');
 			~filt = ~dfamFilt.create('F');
 			~osc1Mix = ~volume.create('M1');
@@ -185,7 +185,7 @@
 				gui;
 
 				gui = (
-					matrix: { self.patcher.makeGui(pv, nil, ["S"]) },
+					matrix: { self.patcher.makeGui(pv, nil, ["O"]) },
 					modpod: {
 						self.modPod.makeGui(
 							mpv,
