@@ -23,17 +23,18 @@ o = OSCFunc({|msg|
 			(a.notNil).if({
 				(a < 1).if({
 					~dfam2.trigger();
-					~dfam2.seq.setParams(\t_advance, 1);
+					~dfam2.seq.node.set(\t_advance, 1);
 				});
 			}, {
 				~dfam2.trigger();
-				~dfam2.seq.setParams(\t_advance, 1);
+				~dfam2.seq.node.set(\t_advance, 1);
 			});
 		});
 	});
 }, '/dfamseq');
-~dfam2.seq.setParams(\t_reset, 1);
-~dfam1.seq.setParams(\t_reset, 1, \play, 1);
+~dfam1.seq.node.set(\t_reset, 1);
+~dfam2.seq.node.set(\t_reset, 1);
+~dfam1.seq.setParams(\play, 1);
 )
 o.free
 
@@ -48,19 +49,20 @@ o = OSCFunc({|msg|
 				(a.notNil).if({
 					(a < 1).if({
 						~dfam2.trigger();
-						~dfam2.seq.setParams(\t_advance, 1);
+						~dfam2.seq.node.set(\t_advance, 1);
 					});
 				}, {
 					~dfam2.trigger();
-					~dfam2.seq.setParams(\t_advance, 1);
+					~dfam2.seq.node.set(\t_advance, 1);
 				});
 			});
 		});
 		count = count + 1;
 	});
 }, '/dfamseq');
-~dfam2.seq.setParams(\t_reset, 1);
-~dfam1.seq.setParams(\t_reset, 1, \play, 1);
+~dfam1.seq.node.set(\t_reset, 1);
+~dfam2.seq.node.set(\t_reset, 1);
+~dfam1.seq.setParams(\play, 1);
 )
 o.free
 
@@ -76,21 +78,22 @@ o = OSCFunc({|msg|
 				(a.notNil).if({
 					(a < 1).if({
 						~dfam2.trigger();
-						~dfam2.seq.setParams(\t_advance, 1);
+						~dfam2.seq.node.set(\t_advance, 1);
 					});
 				}, {
 					~dfam2.trigger();
-					~dfam2.seq.setParams(\t_advance, 1);
+					~dfam2.seq.node.set(\t_advance, 1);
 				});
 			});
 			beats = beats + 1;
 			// uncomment to reset 2 after 7 steps
-			// (beats % 7 == 0).if({ ~dfam2.setParams(\t_reset, 1); });
+			// (beats % 7 == 0).if({ ~dfam2.seq.node.set(\t_reset, 1); });
 		});
 		count = count + 1;
 	});
 }, '/dfamseq');
-~dfam2.seq.setParams(\t_reset, 1);
-~dfam1.seq.setParams(\t_reset, 1, \play, 1);
+~dfam1.seq.node.set(\t_reset, 1);
+~dfam2.seq.node.set(\t_reset, 1);
+~dfam1.seq.setParams(\play, 1);
 )
 o.free

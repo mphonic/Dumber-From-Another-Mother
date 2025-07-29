@@ -8,7 +8,7 @@
 
 // You'll need SCPlugins installed for this example https://github.com/supercollider/sc3-plugins/releases
 ( // Use a Gendy to generate freq patterns that evolve
-g = {|minfreq = 6, maxfreq = 12, drift = 0.2, steps = 6|
+g = {|minfreq = 6, maxfreq = 12, drift = 0.2, steps = 16|
 	var p, v, t;
 	p = Gendy5.kr(minfreq: minfreq / steps, maxfreq: maxfreq / steps, ampscale: drift, durscale: drift, initCPs: 16, knum: steps);
 	t = HPZ2.kr(p);
@@ -35,7 +35,7 @@ o = OSCFunc({|msg|
 	~dfam.filt.setParams(\ffreq, f * a.linlin(0.0, 1.0, 2, 6.0));
 	~dfam.v.setParams(\amp, a);
 	~dfam.out.setParams(\pan, rrand(-1.0, 1.0));
-	~dfam.trigger();
+	~dfam.groups.envs.set(\t_gate, g);
 }, '/xseq');
 )
 // In the GUI, move the active "p" knob to detune oscs
@@ -52,9 +52,8 @@ g.set(\minfreq, 0.1, \maxfreq, 24);
 g.set(\minfreq, 8, \maxfreq, 8);
 // change number of steps
 g.set(\steps, 4);
-g.set(\steps, 3);
+g.set(\steps, 6);
 g.set(\steps, 2);
-// max steps
 g.set(\steps, 16);
 // see what's happening by syncing the GUI
 ~dfam.syncGui();

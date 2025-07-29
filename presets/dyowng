@@ -45,7 +45,7 @@ p = [
 		nil,  nil,  'MN',  o[14],  
 		nil,  nil,  nil,  nil,  
 		nil,  nil,  nil,  nil,  
-		'LFO',  o[16],  'E2',  o[18],  
+		'E2',  o[16],  'LFO',  o[18],  
 		nil,  nil,  nil,  nil,  
 		nil,  nil,  nil,  nil,  
 		'F',  o[20],  nil,  nil,  
@@ -70,7 +70,7 @@ p = [
 	3, [ nil,  nil,  nil,  nil,  
 		nil,  nil,  nil,  nil,  
 		nil,  nil,  nil,  nil,  
-		'pan',  0.0,  'amp',  1.0,  
+		'pan',  0.58208203315735,  'amp',  1.0,  
 		nil,  nil,  nil,  nil,  
 		nil,  nil,  nil,  nil,  
 		nil,  nil,  nil,  nil,  
@@ -94,11 +94,11 @@ p = [
 		nil,  nil,  nil,  nil,  
 		'amp',  1.0,  nil,  nil,  
 		nil,  nil,  'envLevel',  -0.22460044920444,  
-		'freq',  698.45648193359,  'fmLevel',  1.0,  
+		'fmLevel',  1.0,  'freq',  698.45648193359,  
 		nil,  nil,  'lastSelectedSynthDef',  0,  
 		nil,  nil,  nil,  nil ],  
 	// Dictionary
-	8, [ array: o[9],  size: 3 ],  
+	8, [ array: o[9],  size: 4 ],  
 	// Array
 	9, [ nil,  nil,  nil,  nil,  
 		nil,  nil,  'att',  0.0,  
@@ -106,18 +106,18 @@ p = [
 		nil,  nil,  nil,  nil,  
 		nil,  nil,  'curve',  -4.0,  
 		nil,  nil,  nil,  nil,  
-		nil,  nil,  nil,  nil,  
+		't_gate',  0.0,  nil,  nil,  
 		nil,  nil,  nil,  nil ],  
 	// Dictionary
-	10, [ array: o[11],  size: 4 ],  
+	10, [ array: o[11],  size: 7 ],  
 	// Array
-	11, [ nil,  nil,  nil,  nil,  
+	11, [ 't_advance',  0.0,  nil,  nil,  
 		nil,  nil,  nil,  nil,  
 		nil,  nil,  'play',  0.0,  
 		'v',  o[12],  nil,  nil,  
 		nil,  nil,  'p',  o[13],  
-		nil,  nil,  'tempo',  3.994537115097,  
-		nil,  nil,  nil,  nil,  
+		nil,  nil,  't_reset',  0.0,  
+		't_repeat',  0.0,  'tempo',  3.994537115097,  
 		nil,  nil,  nil,  nil ],  
 	// Array
 	12, [ 0.0,  0.0,  0.0,  0.0,  
@@ -137,25 +137,25 @@ p = [
 		nil,  nil,  nil,  nil,  
 		nil,  nil,  nil,  nil ],  
 	// Dictionary
-	16, [ array: o[17],  size: 1 ],  
+	16, [ array: o[17],  size: 4 ],  
 	// Array
 	17, [ nil,  nil,  nil,  nil,  
-		nil,  nil,  nil,  nil,  
-		nil,  nil,  nil,  nil,  
-		nil,  nil,  nil,  nil,  
-		nil,  nil,  nil,  nil,  
-		'freq',  0.96139448881149,  nil,  nil,  
-		nil,  nil,  nil,  nil,  
-		nil,  nil,  nil,  nil ],  
-	// Dictionary
-	18, [ array: o[19],  size: 3 ],  
-	// Array
-	19, [ nil,  nil,  nil,  nil,  
 		nil,  nil,  'att',  0.0,  
 		nil,  nil,  'dec',  0.014297117479146,  
 		nil,  nil,  nil,  nil,  
 		nil,  nil,  'curve',  -4.0,  
 		nil,  nil,  nil,  nil,  
+		't_gate',  0.0,  nil,  nil,  
+		nil,  nil,  nil,  nil ],  
+	// Dictionary
+	18, [ array: o[19],  size: 1 ],  
+	// Array
+	19, [ nil,  nil,  nil,  nil,  
+		nil,  nil,  nil,  nil,  
+		nil,  nil,  nil,  nil,  
+		nil,  nil,  nil,  nil,  
+		nil,  nil,  nil,  nil,  
+		'freq',  0.96139448881149,  nil,  nil,  
 		nil,  nil,  nil,  nil,  
 		nil,  nil,  nil,  nil ],  
 	// Dictionary
@@ -165,8 +165,8 @@ p = [
 		'ffreq',  1443.7683105469,  nil,  nil,  
 		nil,  nil,  nil,  nil,  
 		'amp',  1.0,  'res',  0.2614498436451,  
-		nil,  nil,  'fmLevel',  0.12250000238419,  
-		'envLevel',  0.63462954759598,  nil,  nil,  
+		nil,  nil,  'envLevel',  0.63462954759598,  
+		'fmLevel',  0.12250000238419,  nil,  nil,  
 		nil,  nil,  nil,  nil,  
 		nil,  nil,  nil,  nil ],  
 	// List
@@ -275,7 +275,7 @@ p = [
 		'mul',  1.0,  nil,  nil,  
 		'outputKey',  o[77],  nil,  nil ],  
 	// Dictionary
-	78, [ array: o[79],  size: 3 ],  
+	78, [ array: o[79],  size: 4 ],  
 	// Array
 	79, [ nil,  nil,  nil,  nil,  
 		nil,  nil,  'att',  0.0,  
@@ -283,7 +283,7 @@ p = [
 		nil,  nil,  nil,  nil,  
 		nil,  nil,  'curve',  -4.0,  
 		nil,  nil,  nil,  nil,  
-		nil,  nil,  nil,  nil,  
+		't_gate',  0.0,  nil,  nil,  
 		nil,  nil,  nil,  nil ],  
 	// Dictionary
 	80, [ array: o[81],  size: 1 ],  
@@ -362,7 +362,7 @@ p = [
 		nil,  nil,  nil,  nil,  
 		nil,  nil,  nil,  nil ],  
 	// Dictionary
-	106, [ array: o[107],  size: 3 ],  
+	106, [ array: o[107],  size: 4 ],  
 	// Array
 	107, [ nil,  nil,  nil,  nil,  
 		nil,  nil,  'att',  0.0099999997764826,  
@@ -370,7 +370,7 @@ p = [
 		nil,  nil,  nil,  nil,  
 		nil,  nil,  'curve',  -4.0,  
 		nil,  nil,  nil,  nil,  
-		nil,  nil,  nil,  nil,  
+		't_gate',  0.0,  nil,  nil,  
 		nil,  nil,  nil,  nil ]
 ];
 prUnarchive(o,p);

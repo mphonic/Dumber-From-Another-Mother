@@ -55,7 +55,7 @@
 	},
 	customSetFromSettings: {|self, dict, cb|
 		(self.stopOnSettingsChange).if({ self.setParams(\play, 0) });
-		(self.resetOnSettingsChange).if({ self.setParams(\t_reset, 1); });
+		(self.resetOnSettingsChange).if({ self.node.set(\t_reset, 1); });
 		cb.value(dict);
 	},
 	makeGui: {|self, parent, styles|
@@ -101,7 +101,7 @@
 		tb = Button(tview, bw@bh)
 		.states_([["Trigger"]])
 		.action_({
-			self.setParams(\t_repeat, 1);
+			self.node.set(\t_repeat, 1);
 			self.trigFunc();
 		});
 		p = Button(tview, bw@bh)
@@ -117,12 +117,12 @@
 		.states_([["Reset"]])
 		.action_({|v|
 			self.views[\ind].do({|e| e.background_(Color.clear) });
-			self.setParams(\t_reset, 1);
+			self.node.setn(\t_reset, 1);
 		});
 		Button(tview, bw@bh)
 		.states_([["Adv"]])
 		.action_({|v|
-			self.setParams(\t_advance, 1);
+			self.node.set(\t_advance, 1);
 		});
 
 		self.views[\reset] = r;
@@ -144,6 +144,7 @@
 							self[\controls][params[i]].getn(8, {|val|
 								{
 									val[c] = spec.map(v.value);
+									// self.node.setn(params[i], val);
 									self[\controls][params[i]].setn(val);
 								}.defer
 							});
