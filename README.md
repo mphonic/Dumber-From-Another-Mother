@@ -43,7 +43,7 @@ Then hit shift-enter. The DFAM interface should open (it may open in a backgroun
 
 Just like the Moog DFAM, this instrument can produce a vast array of sounds from just a few sources. A single patch can play the role of kick, snare, bass, and bizarre animal squelch, and a single tweak to a single patch can change things drastically.
 
-Much more documentation coming soon... (See [Donate](#donate) below to help carve out time for such intense labor)
+Much more documentation coming soon... (See [Donate](#donate) to help carve out time for such intense labor)
 
 ## Controlling with SC Code
 There are a few code examples that show how the DFAM can be controlled with regular Supercollider programming. See `probability-sequence.scd`, `gendy-sequence.scd` (you'll need [sc3-plugins](https://github.com/supercollider/sc3-plugins/releases) for that example), and `two-dfams.scd`.  
