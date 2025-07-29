@@ -324,7 +324,7 @@
 
 			~syncGui = {|self|
 				self.sortedModules.do({|e|
-					(e.name != 'SE').if({ e.syncGui(); });
+					e.syncGui();
 				});
 			};
 
@@ -402,6 +402,7 @@
 				self.modPod.setFromSettings(
 					settings[\modPod] ? Dictionary.new
 				);
+				self.presetName = name;
 				(self.guiWindow.notNil).if({
 					{
 						s.sync;

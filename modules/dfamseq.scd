@@ -69,10 +69,11 @@
 		lh = style.lineHeight ? 11,
 		bw = style.toggleButtonWidth ? 50,
 		bh = style.toggleButtonHeight ? 25,
+		tSpec = ControlSpec(1.0, 20, \exp),
 		t = Knob(bounds: ks@ks)
 		.action_({|v|
 			{
-				self.setParams(\trigRate, ControlSpec(1.0, 20, \exp).map(v.value));
+				self.setParams(\trigRate, tSpec.map(v.value));
 			}.defer;
 		}),
 		r,
@@ -93,9 +94,9 @@
 		f.nextLine;*/
 		style.viewWithTopLabel(tview, ks@(ks + lh), "Tempo", t);
 		self[\controls][\trigRate].get({|v|
-			{ t.value_(ControlSpec(1, 20.0, \exp).unmap(v)) }.defer
+			{ t.value_(tSpec.unmap(v)) }.defer
 		});
-		self.views[\trigRate] = t;
+		self.views[\trigRate] = [t, tSpec];
 		td.nextLine;
 		tb = Button(tview, bw@bh)
 		.states_([["Trigger"]])
@@ -191,5 +192,48 @@
 		view.layout_(hl);*/
 		self.views[\view] = view;
 		view;
+	},
+	syncGui: {|self|
+		(self.guiTask.notNil).if({
+			(self.guiTask.isPlaying.not).if({ self.guiTask.play });
+		}, {
+			(self.views.notNil).if({
+				var keys = self[\controls].keys
+				.select({|key|
+					self.views[key].notNil
+					.and([\v, \p].includes(key.asSymbol).not)
+				});
+
+				self.guiTask = Task({
+					loop {
+						keys.do({|key|
+							var gui = self.views[key],
+							view = (gui.isArray).if({ gui[0] }, { gui }),
+							spec = (gui.isArray).if({ gui[1] }, { nil });
+							self[\controls][key].get({|v|
+								{
+									(spec.notNil).if({
+										view.value_(spec.unmap(v));
+									}, {
+										view.value_(v);
+									});
+								}.defer;
+							});
+						});
+						[\v, \p].do({|key|
+							var spec = \pan.asSpec,
+							gui = self.views[key];
+							self[\controls][key].getn(8, {|v|
+								v.do({|e, c|
+									{ gui[c][0].value_(spec.unmap(e)); }.defer
+								});
+							});
+						});
+						0.09.wait;
+					}
+				});
+				self.guiTask.play;
+			});
+		});
 	}
 );

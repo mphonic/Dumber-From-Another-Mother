@@ -6,6 +6,7 @@
 ~dfam.loadSettings(Document.current.dir ++ "/presets/dyowng");
 ~dfam.makeGui();
 
+// You'll need SCPlugins installed for this example https://github.com/supercollider/sc3-plugins/releases
 ( // Use a Gendy to generate freq patterns that evolve
 g = {|minfreq = 6, maxfreq = 12, drift = 0.2, steps = 16|
 	var p, v, t;

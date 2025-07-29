@@ -70,3 +70,6 @@ t = 140
 }.fork
 )
 d.free
+
+~dfam.syncGui();
+~dfam.stopSyncGui();
