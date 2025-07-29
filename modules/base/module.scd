@@ -66,10 +66,11 @@
 		a = self.getSynthDef().func.argNames,
 		o = self.outputs.keys,
 		i = self.inputs.keys,
-		io = o ++ i,
-		rates = self.rateMap;
+		io = o ++ i;
 		a.do({|key|
-			(io.includes(key).not).if({
+			((io.includes(key).not)
+				.and("^(t_|i_)".matchRegexp(key.asString).not)
+			).if({
 				var conf = c[key] ? \k;
 				c[key] = self.getBusFromConfig(conf);
 				m[key] = Dictionary[
