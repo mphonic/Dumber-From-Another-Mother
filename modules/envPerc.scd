@@ -65,5 +65,41 @@
 		style.knobRow(view, knobConf, self);
 		self.views[\view] = view;
 		view;
+	},
+	syncGui: {|self|
+		(self.guiTask.notNil).if({
+			(self.guiTask.isPlaying.not).if({ self.guiTask.play });
+		}, {
+			(self.views.notNil).if({
+				var keys = self[\controls].keys
+				.select({|key| self.views[key].notNil });
+
+				self.guiTask = Task({
+					loop {
+						keys.do({|key|
+							var gui = self.views[key],
+							view = (gui.isArray).if({ gui[0] }, { gui }),
+							spec = (gui.isArray).if({ gui[1] }, { nil });
+							self[\controls][key].get({|v|
+								var val = v;
+								(key == 'att' && view.class == Button).if({
+									val = (v < 0.1).if({ 0 }, { 1 });
+									spec = nil;
+								});
+								{
+									(spec.notNil).if({
+										view.value_(spec.unmap(val));
+									}, {
+										view.value_(val);
+									});
+								}.defer;
+							});
+						});
+						0.09.wait;
+					}
+				});
+				self.guiTask.play;
+			});
+		});
 	}
 );
