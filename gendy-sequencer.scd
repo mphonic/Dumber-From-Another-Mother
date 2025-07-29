@@ -62,3 +62,7 @@ g.set(\steps, 16);
 ~dfam.stopSyncGui();
 // stop the silliness, but keep the dfam running
 g.free; o.free;
+
+{ SinOsc.ar(400, 0, 0.1).dup }.play
+
+s.options.sampleRate = 44100
