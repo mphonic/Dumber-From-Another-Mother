@@ -47,7 +47,7 @@ g.set(\drift, 0.2);
 // double speed
 g.set(\minfreq, 12, \maxfreq, 24);
 // stretch the rhythm
-g.set(\minfreq, 2, \maxfreq, 18);
+g.set(\minfreq, 0.1, \maxfreq, 24);
 // steady the rhythm
 g.set(\minfreq, 8, \maxfreq, 8);
 // change number of steps
