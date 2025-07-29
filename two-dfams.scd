@@ -4,10 +4,15 @@
 ~makeADfam.value({|d| ~dfam2 = d });
 )
 // Wait til you see "Ready to go."
+(
 ~dfam1.loadSettings(Document.current.dir ++ "/presets/shoike");
 ~dfam2.loadSettings(Document.current.dir ++ "/presets/hormp");
+)
+
+(
 ~dfam1.makeGui();
 ~dfam2.makeGui();
+)
 
 ( // First DFAM plays and causes second to advance
 o = OSCFunc({|msg|
@@ -62,7 +67,8 @@ o = OSCFunc({|msg|
 o.free
 
 ( // First DFAM plays and causes second to advance every three trigs
-var count = 0;
+var count = 0,
+beats = 0;
 o = OSCFunc({|msg|
 	var v = msg[msg.size - 2],
 	a = msg[msg.size - 1];
@@ -79,6 +85,9 @@ o = OSCFunc({|msg|
 					~dfam2.seq.node.set(\t_advance, 1);
 				});
 			});
+			beats = beats + 1;
+			// uncomment to reset 2 after 7 steps
+			// (beats % 7 == 0).if({ ~dfam2.seq.node.set(\t_reset, 1); });
 		});
 		count = count + 1;
 	});
