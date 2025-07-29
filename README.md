@@ -32,6 +32,8 @@ The DFAM is now running, but you'll probably want an interface. Put your cursor 
 ```
 Then hit shift-enter. The DFAM interface should open (it may open in a background window, so check your app tray / dock for a grey cube icon). Hit "L" on the interface to load presets. Some presets are meant for the included code examples. If all of the "Pitch" and "Vel" knobs are at center, you're probably looking at one of those presets. For any other preset, hit the "Play" button and start messing around. 
 
+"S" allows you to save the current state as a preset. "R" records the audio into the `/recordings` folder (remember to hit it again to stop recording). Hitting ctrl-. (cmd-. on Mac) will stop everything and close the interface window. Just repeat the steps above to start again.
+
 Much more documentation coming soon... (See [Donate](#donate) below to help carve out time for such intense labor)
 
 ## Controlling with SC Code
@@ -41,6 +43,7 @@ Details on how to access DFAM properties coming soon...
 
 # Donate
 [Venmo](https://account.venmo.com/u/Bhob-Rainey)
+
 [PayPal](https://paypal.me/bhobrainey)
 
 This is a one-person operation. Please enjoy the fruits of open source software and share your own efforts. Also consider donating to help offset the massive effort and swaths of time eaten up in the creation, testing, and documenting of these wild tools. It really, really helps!
