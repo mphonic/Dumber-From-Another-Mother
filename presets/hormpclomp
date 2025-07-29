@@ -110,7 +110,7 @@ p = [
 		nil,  nil,  nil,  nil,  
 		nil,  nil,  nil,  nil ],  
 	// Dictionary
-	8, [ array: o[9],  size: 4 ],  
+	8, [ array: o[9],  size: 3 ],  
 	// Array
 	9, [ nil,  nil,  nil,  nil,  
 		nil,  nil,  'att',  0.0,  
@@ -118,18 +118,18 @@ p = [
 		nil,  nil,  nil,  nil,  
 		nil,  nil,  'curve',  -4.0,  
 		nil,  nil,  nil,  nil,  
-		't_gate',  0.0,  nil,  nil,  
+		nil,  nil,  nil,  nil,  
 		nil,  nil,  nil,  nil ],  
 	// Dictionary
-	10, [ array: o[11],  size: 7 ],  
+	10, [ array: o[11],  size: 4 ],  
 	// Array
-	11, [ 't_advance',  0.0,  nil,  nil,  
+	11, [ nil,  nil,  nil,  nil,  
 		nil,  nil,  nil,  nil,  
-		nil,  nil,  'play',  1.0,  
-		'v',  o[12],  nil,  nil,  
+		nil,  nil,  'v',  o[12],  
+		'play',  0.0,  nil,  nil,  
 		nil,  nil,  'p',  o[13],  
-		nil,  nil,  't_reset',  0.0,  
-		't_repeat',  0.0,  'tempo',  6.6207013130188,  
+		nil,  nil,  'tempo',  6.6207013130188,  
+		nil,  nil,  nil,  nil,  
 		nil,  nil,  nil,  nil ],  
 	// Array
 	12, [ 0.42289966344833,  -1.0,  0.054200682789087,  -0.84579932689667,  
@@ -149,7 +149,7 @@ p = [
 		nil,  nil,  nil,  nil,  
 		nil,  nil,  nil,  nil ],  
 	// Dictionary
-	16, [ array: o[17],  size: 4 ],  
+	16, [ array: o[17],  size: 3 ],  
 	// Array
 	17, [ nil,  nil,  nil,  nil,  
 		nil,  nil,  'att',  0.0,  
@@ -157,7 +157,7 @@ p = [
 		nil,  nil,  nil,  nil,  
 		nil,  nil,  'curve',  -4.0,  
 		nil,  nil,  nil,  nil,  
-		't_gate',  0.0,  nil,  nil,  
+		nil,  nil,  nil,  nil,  
 		nil,  nil,  nil,  nil ],  
 	// Dictionary
 	18, [ array: o[19],  size: 2 ],  
@@ -316,7 +316,7 @@ p = [
 		'mul',  1.0,  nil,  nil,  
 		'outputKey',  o[89],  nil,  nil ],  
 	// Dictionary
-	90, [ array: o[91],  size: 4 ],  
+	90, [ array: o[91],  size: 3 ],  
 	// Array
 	91, [ nil,  nil,  nil,  nil,  
 		nil,  nil,  'att',  0.0,  
@@ -324,7 +324,7 @@ p = [
 		nil,  nil,  nil,  nil,  
 		nil,  nil,  'curve',  -4.0,  
 		nil,  nil,  nil,  nil,  
-		't_gate',  0.0,  nil,  nil,  
+		nil,  nil,  nil,  nil,  
 		nil,  nil,  nil,  nil ],  
 	// Dictionary
 	92, [ array: o[93],  size: 1 ],  
@@ -419,7 +419,7 @@ p = [
 		nil,  nil,  nil,  nil,  
 		nil,  nil,  nil,  nil ],  
 	// Dictionary
-	120, [ array: o[121],  size: 4 ],  
+	120, [ array: o[121],  size: 3 ],  
 	// Array
 	121, [ nil,  nil,  nil,  nil,  
 		nil,  nil,  'att',  0.0099999997764826,  
@@ -427,7 +427,7 @@ p = [
 		nil,  nil,  nil,  nil,  
 		nil,  nil,  'curve',  -4.0,  
 		nil,  nil,  nil,  nil,  
-		't_gate',  0.0,  nil,  nil,  
+		nil,  nil,  nil,  nil,  
 		nil,  nil,  nil,  nil ]
 ];
 prUnarchive(o,p);
