@@ -12,7 +12,7 @@ This is a one-person operation. Please enjoy the fruits of open source software 
 
 ## Requirements
 
-This software needs to be run in [Supercollider](https://supercollider.github.io/downloads.html), which is free. You don't need to know anything about Supercollider to use it, but if you know Supercollider, you can do a whole lot of extra wild stuff.
+This software needs to be run in [Supercollider](https://supercollider.github.io/downloads.html), which is free. You don't need to know anything about Supercollider to use the Dumber from Another Mother, but if you know Supercollider, you can do a whole lot of extra wild stuff.
 
 ## Getting Started
 
