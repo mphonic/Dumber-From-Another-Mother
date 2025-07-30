@@ -1,7 +1,7 @@
 # SC DFAM
 ## Dumber from Another Mother
 
-A SuperCollider instrument inspired by the [Moog DFAM](https://www.moogmusic.com/synthesizers/dfam/). It's similar, but it's... more.
+A SuperCollider instrument inspired by the [Moog DFAM](https://www.moogmusic.com/synthesizers/dfam/). It's similar, but it's... more. More modules, more patching, more modulation, more idiosyncrasies. 
 
 # Donate
 [Venmo](https://account.venmo.com/u/Bhob-Rainey)
@@ -45,7 +45,10 @@ Just like the Moog DFAM, this instrument can produce a vast array of sounds from
 
 Much more documentation coming soon... (See [Donate](#donate) to help carve out time for such intense labor)
 
-## Controlling with SC Code
-There are a few code examples that show how the DFAM can be controlled with regular Supercollider programming. See `probability-sequence.scd`, `gendy-sequence.scd` (you'll need [sc3-plugins](https://github.com/supercollider/sc3-plugins/releases) for that example), and `two-dfams.scd`.  
+## MIDI Control
+See the `midi-control.scd` file for an example. You can use a keyboard, set legato, keytrack, and velocity sensitivity. You can map cc to different parameters. Of course you can.
 
-Details on how to access DFAM properties coming soon...
+## Controlling with SC Code
+There are a few code examples that show how the DFAM can be controlled with regular Supercollider programming. See `probability-sequence.scd`, `randomize-settings.scd`, `stutter.scd`, `gendy-sequence.scd` (you'll need [sc3-plugins](https://github.com/supercollider/sc3-plugins/releases) for that example), and `two-dfams.scd`.  
+
+Details on how to access DFAM properties in SC coming soon...
