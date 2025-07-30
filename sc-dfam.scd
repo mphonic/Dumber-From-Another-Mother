@@ -182,6 +182,8 @@
 				lf,
 
 				sc, // sequence container
+				o1m, // pitch mappers
+				o2m,
 				gui;
 
 				gui = (
@@ -284,7 +286,7 @@
 				StaticText(lv).fixedWidth_(50)
 				.string_("Map Pitch");
 				lf.nextLine;
-				Button(lv, 50@20)
+				o1m = Button(lv, 50@20)
 				.states_([["O1 off"], ["O1 on"]])
 				.action_({|v|
 					{
@@ -299,7 +301,7 @@
 					1 },
 				{ 0 }));
 				lf.nextLine;
-				Button(lv, 50@20)
+				o2m = Button(lv, 50@20)
 				.states_([["O2 off"], ["O2 on"]])
 				.action_({|v|
 					{
@@ -316,6 +318,8 @@
 				sc.addFlowLayout(pl@0, 0@0);
 
 				gui.seq();
+				self.seq.views[\osc1Map] = o1m;
+				self.seq.views[\osc2Map] = o2m;
 
 				gui.matrix();
 				gui.modpod();
