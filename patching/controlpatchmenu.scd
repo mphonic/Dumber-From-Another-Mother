@@ -125,7 +125,7 @@ extension = (
 			});
 		})
 		.value_((output.isNil).if({ 0 }, { oItems.indexOf(output) + 1 }));
-		close = Button(v, ks@20)
+		close = Button(v, mh@mh)
 		.states_([["x"]])
 		.action_({|v|
 			self.unpatch(output.asString, id);
