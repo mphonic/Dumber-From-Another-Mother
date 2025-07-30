@@ -23,6 +23,11 @@
 	\lfo,
 	\modPod
 ];
+// if you want to choose from a few settings for each example
+~settings = ["phlomp", "schnufflero", "crowmble", "shoiken"];
+~selectASetting = {
+	~dfam.loadSettings(Document.current.dir ++ "/presets/" ++ ~settings.choose);
+};
 )
 
 // We can totally randomize, or just nudge
@@ -174,6 +179,8 @@ nudgeView = {|view, dev = 0|
 ( // nudge seq every 8 steps
 var count = 0;
 o.free;
+// Uncomment if you want select from the settings array
+// ~selectASetting.value;
 ~dfam.seq.setParams(\t_reset, 1, \play, 1);
 o = OSCFunc({|msg|
 	(count % 8 == 0).if({
@@ -187,6 +194,8 @@ o.free
 ( // nudge everything but seq and oscs every 8 steps, exclude buttons
 var count = 0;
 o.free;
+// Uncomment if you want select from the settings array
+// ~selectASetting.value;
 ~dfam.seq.setParams(\t_reset, 1, \play, 1);
 o = OSCFunc({|msg|
 	(count % 8 == 0).if({
@@ -199,6 +208,8 @@ o.free
 
 ( // *maybe* nudge everything but output on a step, exlude buttons
 o.free;
+// Uncomment if you want select from the settings array
+// ~selectASetting.value;
 ~dfam.seq.setParams(\t_reset, 1, \play, 1);
 o = OSCFunc({|msg|
 	(0.1.coin).if({
