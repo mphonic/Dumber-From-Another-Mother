@@ -14,6 +14,10 @@ This is a one-person operation. Please enjoy the fruits of open source software 
 
 This software needs to be run in [Supercollider](https://supercollider.github.io/downloads.html), which is free. You don't need to know anything about Supercollider to use the Dumber from Another Mother, but if you know Supercollider, you can do a whole lot of extra wild stuff.
 
+After installing Supercollider, you'll need to download and install [sc3-plugins](https://github.com/supercollider/sc3-plugins/releases). There are instructions in the download package that explain how to install (you'll need to move some files to a folder). It's not hard.
+
+If you follow the gettting started instructions and wind up with an error akin to "Can't find MoogVCF", then you probably didn't quite succeed at installing sc3-plugins. 
+
 ## Getting Started
 
 In Supercollider, open the `play-dfam.scd` file. Put your cursor somewhere within this block of code:
@@ -49,6 +53,6 @@ Much more documentation coming soon... (See [Donate](#donate) to help carve out 
 See the `midi-control.scd` file for an example. You can use a keyboard, set legato, keytrack, and velocity sensitivity. You can map cc to different parameters. Of course you can.
 
 ## Controlling with SC Code
-There are a few code examples that show how the DFAM can be controlled with regular Supercollider programming. See `probability-sequence.scd`, `randomize-settings.scd`, `stutter.scd`, `gendy-sequence.scd` (you'll need [sc3-plugins](https://github.com/supercollider/sc3-plugins/releases) for that example), and `two-dfams.scd`.  
+There are a few code examples that show how the DFAM can be controlled with regular Supercollider programming. See `probability-sequence.scd`, `randomize-settings.scd`, `stutter.scd`, `gendy-sequence.scd`, and `two-dfams.scd`.  
 
 Details on how to access DFAM properties in SC coming soon...
