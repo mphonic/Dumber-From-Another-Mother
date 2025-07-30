@@ -25,26 +25,26 @@ o = OSCFunc({|msg|
 				(a.notNil).if({
 					(a < 1).if({
 						~dfam2.trigger();
-						~dfam2.seq.setParams(\t_advance, 1);
+						~dfam2.seq.advanceSeq();
 					});
 				}, {
 					~dfam2.trigger();
-					~dfam2.seq.setParams(\t_advance, 1);
+					~dfam2.seq.advanceSeq();
 				});
 			});
 		});
 	});
 }, '/dfamseq');
 s.bind({
-	~dfam1.seq.setParams(\t_reset, 1);
-	~dfam2.seq.setParams(\t_reset, 1);
-	~dfam1.seq.setParams(\play, 1);
+	~dfam1.seq.startSeq(true);
+	~dfam2.seq.resetSeq();
 });
 )
 o.free
 
 ( // First DFAM plays and causes second to advance at half time
 var count = 0;
+o.free;
 o = OSCFunc({|msg|
 	var v = msg[msg.size - 2],
 	a = msg[msg.size - 1];
@@ -55,11 +55,11 @@ o = OSCFunc({|msg|
 					(a.notNil).if({
 						(a < 1).if({
 							~dfam2.trigger();
-							~dfam2.seq.setParams(\t_advance, 1);
+							~dfam2.seq.advanceSeq();
 						});
 					}, {
 						~dfam2.trigger();
-						~dfam2.seq.setParams(\t_advance, 1);
+						~dfam2.seq.advanceSeq();
 					});
 				});
 			});
@@ -68,9 +68,8 @@ o = OSCFunc({|msg|
 	});
 }, '/dfamseq');
 s.bind({
-	~dfam1.seq.setParams(\t_reset, 1);
-	~dfam2.seq.setParams(\t_reset, 1);
-	~dfam1.seq.setParams(\play, 1);
+	~dfam1.seq.startSeq(true);
+	~dfam2.seq.resetSeq();
 });
 )
 o.free
@@ -78,6 +77,7 @@ o.free
 ( // First DFAM plays and causes second to advance every three trigs
 var count = 0,
 beats = 0;
+o.free;
 o = OSCFunc({|msg|
 	var v = msg[msg.size - 2],
 	a = msg[msg.size - 1];
@@ -88,11 +88,11 @@ o = OSCFunc({|msg|
 					(a.notNil).if({
 						(a < 1).if({
 							~dfam2.trigger();
-							~dfam2.seq.setParams(\t_advance, 1);
+							~dfam2.seq.advanceSeq();
 						});
 					}, {
 						~dfam2.trigger();
-						~dfam2.seq.setParams(\t_advance, 1);
+						~dfam2.seq.advanceSeq();
 					});
 				});
 			});
@@ -104,9 +104,8 @@ o = OSCFunc({|msg|
 	});
 }, '/dfamseq');
 s.bind({
-	~dfam1.seq.setParams(\t_reset, 1);
-	~dfam2.seq.setParams(\t_reset, 1);
-	~dfam1.seq.setParams(\play, 1);
+	~dfam1.seq.startSeq(true);
+	~dfam2.seq.resetSeq();
 });
 )
 o.free

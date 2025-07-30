@@ -181,7 +181,7 @@ var count = 0;
 o.free;
 // Uncomment if you want select from the settings array
 // ~selectASetting.value;
-~dfam.seq.setParams(\t_reset, 1, \play, 1);
+~dfam.seq.startSeq(true);
 o = OSCFunc({|msg|
 	(count % 8 == 0).if({
 		{ ~nudge.value(0.1, ~allModules.select({|v| v != \seq })); }.defer;
@@ -196,7 +196,7 @@ var count = 0;
 o.free;
 // Uncomment if you want select from the settings array
 // ~selectASetting.value;
-~dfam.seq.setParams(\t_reset, 1, \play, 1);
+~dfam.seq.startSeq(true);
 o = OSCFunc({|msg|
 	(count % 8 == 0).if({
 		{ ~nudge.value(0.05, [\seq, \modPod, \osc1, \osc2, \out], true); }.defer;
@@ -210,7 +210,7 @@ o.free
 o.free;
 // Uncomment if you want select from the settings array
 // ~selectASetting.value;
-~dfam.seq.setParams(\t_reset, 1, \play, 1);
+~dfam.seq.startSeq(true);
 o = OSCFunc({|msg|
 	(0.1.coin).if({
 		{ ~nudge.value(0.05, [\out], true); }.defer;

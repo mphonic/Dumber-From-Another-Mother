@@ -54,9 +54,21 @@
 		self.resetOnSettingsChange = b;
 	},
 	customSetFromSettings: {|self, dict, cb|
-		(self.stopOnSettingsChange).if({ self.setParams(\play, 0) });
-		(self.resetOnSettingsChange).if({ self.node.set(\t_reset, 1); });
+		(self.stopOnSettingsChange).if({ self.stopSeq(); });
+		(self.resetOnSettingsChange).if({ self.resetSeq(); });
 		cb.value(dict);
+	},
+	startSeq: {|self, andReset = false|
+		self.setParams(\play, 1, \t_reset, (andReset).if({ 1 }, { 0 }));
+	},
+	stopSeq: {|self|
+		self.setParams(\play, 0);
+	},
+	resetSeq: {|self|
+		self.setParams(\t_reset, 1);
+	},
+	advanceSeq: {|self|
+		self.setParams(\t_advance, 1);
 	},
 	makeGui: {|self, parent, styles|
 		var style = styles ? Event.new,
@@ -117,12 +129,12 @@
 		.states_([["Reset"]])
 		.action_({|v|
 			self.views[\ind].do({|e| e.background_(Color.clear) });
-			self.node.setn(\t_reset, 1);
+			self.resetSeq();
 		});
 		Button(tview, bw@bh)
 		.states_([["Adv"]])
 		.action_({|v|
-			self.node.set(\t_advance, 1);
+			self.advanceSeq();
 		});
 
 		self.views[\reset] = r;

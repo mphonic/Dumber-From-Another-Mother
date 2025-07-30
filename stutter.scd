@@ -14,7 +14,7 @@ subweight = Array.geom(subdivs.size, subdivs.size + 1, 0.5).normalizeSum,
 lastTime,
 i = ~dfam,
 count = 0;
-i.seq.setParams(\play, 1, \t_reset, 1);
+i.seq.startSeq(true);
 o.free;
 o = OSCFunc({
 	var time = SystemClock.seconds;
