@@ -143,7 +143,7 @@
 			~modPod = ~controlPatchbay.create(~sortedModules, envs.modules);
 			s.sync;
 
-			~makeGui = {|self, bounds|
+			~makeGui = {|self, bounds, keepUpdated = true|
 				var w = Window("dfam", bounds ? Rect(80, 250, 1090, 553)),
 				pl = self.style.paddingLeft ? 20,
 				pt = self.style.paddingTop ? 20,
@@ -331,6 +331,9 @@
 
 				CmdPeriod.doOnce { w.close };
 				w.view.palette_(QPalette.dark);
+				self.sortedModules.do({|e|
+					e.keepGuiUpdated = keepUpdated;
+				});
 				w.front;
 			};
 

@@ -3,7 +3,6 @@
 	synthDef: {},
 	outputConfig: Dictionary[\out -> \a],
 	defaults: Dictionary.new,
-	gui: {|self, view| view.postln; },
 	hasInit: false,
 	releaseable: false,
 	rateMap: Dictionary[\a -> 'audio', \k -> 'control'],
@@ -191,13 +190,18 @@
 	setParams: {|...args|
 		var self = args.removeAt(0),
 		a = Dictionary.newFrom(args);
-		a.keys.do({|key|
-			var c = self.controls[key];
-			(c.notNil).if({
-				var chan = c.numChannels;
-				(chan < 2).if({ c.set(a[key]); }, { c.setn(a[key]) });
-			}, {
-				self.node.set(key, a[key]);
+		s.bind({
+			a.keys.do({|key|
+				var c = self.controls[key];
+				(c.notNil).if({
+					var chan = c.numChannels;
+					(chan < 2).if({ c.set(a[key]); }, { c.setn(a[key]) });
+				}, {
+					self.node.set(key, a[key]);
+				});
+				(self.keepGuiUpdated).if({
+					{ self.updateView(key, a[key]) }.defer;
+				});
 			});
 		});
 	},
@@ -216,21 +220,28 @@
 		});
 		self.hasInit = false;
 	},
+	keepGuiUpdated: true,
+	updateView: {|self, key, value|
+		var views = self.views ? Dictionary.new,
+		gui = views[key];
+		(gui.notNil).if({
+			var view = (gui.isArray).if({ gui[0] }, { gui }),
+			spec = (gui.isArray).if({ gui[1] }, { nil });
+			(spec.notNil).if({
+				view.value_(spec.unmap(value));
+			}, {
+				view.value_(value);
+			});
+		});
+	},
 	updateGui: {|self|
 		var keys = self[\controls].keys
 		.select({|key| self.views[key].notNil });
 
 		keys.do({|key|
-			var gui = self.views[key],
-			view = (gui.isArray).if({ gui[0] }, { gui }),
-			spec = (gui.isArray).if({ gui[1] }, { nil });
 			self[\controls][key].get({|v|
 				{
-					(spec.notNil).if({
-						view.value_(spec.unmap(v));
-					}, {
-						view.value_(v);
-					});
+					self.updateView(key, v);
 				}.defer;
 			});
 		});
@@ -246,16 +257,9 @@
 				self.guiTask = Task({
 					loop {
 						keys.do({|key|
-							var gui = self.views[key],
-							view = (gui.isArray).if({ gui[0] }, { gui }),
-							spec = (gui.isArray).if({ gui[1] }, { nil });
 							self[\controls][key].get({|v|
 								{
-									(spec.notNil).if({
-										view.value_(spec.unmap(v));
-									}, {
-										view.value_(v);
-									});
+									self.updateView(key, v);
 								}.defer;
 							});
 						});

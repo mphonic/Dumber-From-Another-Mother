@@ -56,13 +56,6 @@ g.set(\steps, 4);
 g.set(\steps, 6);
 g.set(\steps, 2);
 g.set(\steps, 16);
-// see what's happening by syncing the GUI
-~dfam.syncGui();
-// stop syncing the GUI
-~dfam.stopSyncGui();
+
 // stop the silliness, but keep the dfam running
 g.free; o.free;
-
-{ SinOsc.ar(400, 0, 0.1).dup }.play
-
-s.options.sampleRate = 44100
