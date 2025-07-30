@@ -36,6 +36,7 @@ extension = (
 		id,
 		input,
 		output,
+		close,
 		spec = \pan.asSpec;
 
 		v.decorator_(f);
@@ -73,6 +74,7 @@ extension = (
 			(v.value == 0).if({
 				(id.notNil).if({
 					self.unpatch(output.asString, id);
+					close.visible_(false);
 					id = nil;
 				});
 				input = nil;
@@ -81,8 +83,10 @@ extension = (
 				(output.notNil).if({
 					(id.notNil).if({
 						self.unpatch(output.asString, id);
+						close.visible_(false);
 					});
 					id = self.patch(output.asString, input.asString, spec.map(sl.value));
+					close.visible_(true);
 				});
 			});
 		})
@@ -103,21 +107,33 @@ extension = (
 				(id.notNil).if({
 					self.unpatch(output.asString, id);
 					id = nil;
+					close.visible_(false);
 				});
 				output = nil;
 			}, {
 				(input.notNil).if({
 					(id.notNil).if({
 						self.unpatch(output.asString, id);
+						close.visible_(false);
 					});
 					output = i;
 					id = self.patch(output.asString, input.asString, spec.map(sl.value));
+					close.visible_(true);
 				}, {
 					output = i;
 				});
 			});
 		})
 		.value_((output.isNil).if({ 0 }, { oItems.indexOf(output) + 1 }));
+		close = Button(v, ks@20)
+		.states_([["x"]])
+		.action_({|v|
+			self.unpatch(output.asString, id);
+			pin.value_(0);
+			pou.value_(0);
+			v.visible_(false);
+		})
+		.visible_((pin.value > 0).and(pou.value > 0));
 		v;
 	},
 	makeGui: {|self, parent, mods = 1, excludeInputs|
