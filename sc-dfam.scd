@@ -195,11 +195,12 @@
 							[
 								'O1 pitchmod',
 								'O2 pitchmod',
+								'F ffreqmul',
 								'A amp',
 								'SE p',
 								'SE v',
 								'SE play',
-								'S pan'
+								'O pan'
 							]
 						)
 					},

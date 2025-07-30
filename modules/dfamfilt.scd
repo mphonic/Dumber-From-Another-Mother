@@ -6,6 +6,7 @@
 	synthDef: [
 		SynthDef(\moogVcf, {|in = 30,
 			ffreq = 440,
+			ffreqmul = 1,
 			res = 0.0,
 			fmIn = 30
 			fmLevel = 0.0,
@@ -22,7 +23,7 @@
 			ffreq = Select.ar(fm < 0, [
 				fm.linexp(0.0, 1.0, ffreq, 20000.0),
 				fm.linexp(-1.0, 0.0, 20.0, ffreq)
-			]).lag(0.01);
+			]).lag(0.01) * ffreqmul;
 			filt = MoogVCF.ar(
 				signalInput,
 				ffreq.max(20).min(20000),
@@ -33,6 +34,7 @@
 		}),
 		SynthDef(\bhipass4, {|in = 30,
 			ffreq = 440,
+			ffreqmul = 1,
 			res = 0.0,
 			fmIn = 30
 			fmLevel = 0.0,
@@ -49,7 +51,7 @@
 			ffreq = Select.ar(fm < 0, [
 				fm.linexp(0.0, 1.0, ffreq, 20000.0),
 				fm.linexp(-1.0, 0.0, 20.0, ffreq)
-			]).lag(0.01);
+			]).lag(0.01) * ffreqmul;
 			filt = BHiPass4.ar(
 				signalInput,
 				ffreq.ring1(fm).max(20).min(20000),
