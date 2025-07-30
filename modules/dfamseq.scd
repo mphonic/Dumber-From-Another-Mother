@@ -193,6 +193,26 @@
 		self.views[\view] = view;
 		view;
 	},
+	updateView: {|self, key, value|
+		var views = self.views ? Dictionary.new,
+		gui = views[key];
+		(gui.notNil).if({
+			([\p, \v].includes(key.asSymbol).not).if({
+				var view = (gui.isArray).if({ gui[0] }, { gui }),
+				spec = (gui.isArray).if({ gui[1] }, { nil });
+				(spec.notNil).if({
+					view.value_(spec.unmap(value));
+				}, {
+					view.value_(value);
+				});
+			}, {
+				var spec = \pan.asSpec;
+				value.do({|e, c|
+					gui[c][0].value_(spec.unmap(e));
+				});
+			});
+		});
+	},
 	syncGui: {|self|
 		(self.guiTask.notNil).if({
 			(self.guiTask.isPlaying.not).if({ self.guiTask.play });
