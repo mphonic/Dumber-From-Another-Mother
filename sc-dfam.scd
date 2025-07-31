@@ -142,7 +142,7 @@
 			~modPod = ~controlPatchbay.create(~sortedModules, envs.modules);
 			s.sync;
 
-			~makeGui = {|self, bounds, keepUpdated = true|
+			~makeGui = {|self, bounds, keepUpdated|
 				var w = Window("dfam", bounds ? Rect(80, 250, 1090, 553)),
 				pl = self.style.paddingLeft ? 20,
 				pt = self.style.paddingTop ? 20,
@@ -184,6 +184,8 @@
 				o1m, // pitch mappers
 				o2m,
 				gui;
+
+				keepUpdated = keepUpdated ? self.keepGuiUpdated ? true;
 
 				gui = (
 					matrix: { self.patcher.makeGui(pv, nil, ["O"]) },
@@ -333,6 +335,7 @@
 				self.sortedModules.do({|e|
 					e.keepGuiUpdated = keepUpdated;
 				});
+				self.keepGuiUpdated = keepUpdated;
 				w.front;
 			};
 
