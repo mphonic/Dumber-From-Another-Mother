@@ -55,4 +55,4 @@ See the `midi-control.scd` file for an example. You can use a keyboard, set lega
 ## Controlling with SC Code
 There are a few code examples that show how the DFAM can be controlled with regular Supercollider programming. See `probability-sequence.scd`, `randomize-settings.scd`, `stutter.scd`, `gendy-sequence.scd`, and `two-dfams.scd`.  
 
-Details on how to access DFAM properties in SC coming soon...
+For more granular detail, see `sc-dfam-guide.scd`.
