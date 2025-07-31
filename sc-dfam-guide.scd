@@ -156,9 +156,6 @@ args for setParams:
 ~dfam.seq.stopSeq();
 ~dfam.seq.advanceSeq();
 ~dfam.seq.resetSeq();
-/*
-NOTE: because of the way Stepper works (and the way it's implemented), the reset action when the sequencer is stopped will often leave the sequencer at step 8. When restarted, the sequencer will begin at step 1. This may be updated in a future version.
-*/
 
 // LFO
 /*
