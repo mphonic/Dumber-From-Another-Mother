@@ -18,6 +18,27 @@
 		);
 	}),
 	outputConfig: Dictionary[\out -> \a, \kOut -> \k],
+	trigger: {|self|
+		self.setParams(\t_gate, 1);
+	},
+	longAtt: {|self|
+		var gui = self.views;
+		self.setParams(\att, 0.1);
+		(gui.notNil
+			.and(self.keepGuiUpdated
+				.and(gui[\att].class == Button))).if({
+			{ gui[\att].value_(1); }.defer;
+		});
+	},
+	shortAtt: {|self|
+		var gui = self.views;
+		self.setParams(\att, 0.01);
+		(gui.notNil
+			.and(self.keepGuiUpdated
+				.and(gui[\att].class == Button))).if({
+			{ gui[\att].value_(0); }.defer;
+		});
+	},
 	makeGui: {|self, parent, styles, hideAtt = false, showAttSwitch = false|
 		var style = styles ? Event.new,
 		ks = style.knobSize ? 50,

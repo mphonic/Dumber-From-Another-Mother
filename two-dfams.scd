@@ -1,4 +1,4 @@
-(
+( // HIT cmd-. (ctrl-. on Windows) first
 (Document.current.dir ++ "/sc-dfam.scd").loadPaths;
 ~makeADfam.value({|d| ~dfam1 = d });
 ~makeADfam.value({|d| ~dfam2 = d });

@@ -45,7 +45,7 @@ Then hit shift-enter. The DFAM interface should open (it may open in a backgroun
 
 "S" allows you to save the current state as a preset. "R" records the audio into the `/recordings` folder (remember to hit it again to stop recording). Hitting ctrl-. (cmd-. on Mac) will stop everything and close the interface window. Just repeat the steps above to start again.
 
-Just like the Moog DFAM, this instrument can produce a vast array of sounds from just a few sources. A single patch can play the role of kick, snare, bass, and bizarre animal squelch, and a single tweak to a single patch can change things drastically.
+Just like the Moog DFAM, this instrument can produce a vast array of sounds from only a few sources. A single patch can play the role of kick, snare, bass, and bizarre animal squelch, and a single tweak to a single patch can change things drastically.
 
 Much more documentation coming soon... (See [Donate](#donate) to help carve out time for such intense labor)
 

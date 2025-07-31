@@ -65,11 +65,26 @@
 		self.setParams(\play, 0);
 	},
 	resetSeq: {|self|
+		var gui = self.views,
+		prev = self.previousInd ? 0;
 		self.setParams(\t_reset, 1);
+		(gui.notNil
+			.and(self.keepGuiUpdated
+				.and(prev > 0))).if({
+			{
+				gui[\v][prev][0].background_(self.offColor);
+				gui[\p][prev][0].background_(self.offColor);
+				gui[\v][7][0].background_(self.onColor);
+				gui[\p][7][0].background_(self.onColor);
+			}.defer;
+		});
+		self.previousInd = 7;
 	},
 	advanceSeq: {|self|
 		self.setParams(\t_advance, 1);
 	},
+	onColor: Color(0.75,0.7,0.7),
+	offColor: Color(0.42745098039216, 0.42745098039216, 0.42745098039216),
 	makeGui: {|self, parent, styles|
 		var style = styles ? Event.new,
 		ks = style.knobSize ? 50,
@@ -98,8 +113,8 @@
 		kview = View(view, (view.bounds.width * 0.75)@view.bounds.height),
 		kd = kview.addFlowLayout(0@0, 0@0),
 		spec = \pan.asSpec,
-		offColor = Color(0.42745098039216, 0.42745098039216, 0.42745098039216),
-		onColor = Color(0.75,0.7,0.7);
+		offColor = self.offColor,
+		onColor = self.onColor;
 
 		self.views = Dictionary.new;
 		/*StaticText(view).string_(self.name).fixedWidth_(ks);
@@ -184,18 +199,22 @@
 			}.defer;
 		});
 		self.guiOsc = OSCFunc({|msg|
-			(msg[1] == self.node.nodeID).if({
-				var step = (msg[3] ? 0).max(0);
-				{
-					var v = self.views[\v][step][0],
-					p = self.views[\p][step][0],
-					prev = self.previousInd ? 0;
-					self.views[\v][prev][0].background_(offColor);
-					self.views[\p][prev][0].background_(offColor);
-					v.background_(onColor);
-					p.background_(onColor);
-					self.previousInd = step;
-				}.defer;
+			(self.views.isNil).if({
+				self.guiOsc.free;
+			}, {
+				(msg[1] == self.node.nodeID).if({
+					var step = (msg[3] ? 0).max(0);
+					{
+						var v = self.views[\v][step][0],
+						p = self.views[\p][step][0],
+						prev = self.previousInd ? 0;
+						self.views[\v][prev][0].background_(offColor);
+						self.views[\p][prev][0].background_(offColor);
+						v.background_(onColor);
+						p.background_(onColor);
+						self.previousInd = step;
+					}.defer;
+				});
 			});
 		}, '/dfamseq');
 

@@ -62,6 +62,19 @@
 		})
 	],
 	inputConfig: Dictionary[\in -> \a, \fmIn -> \a, \envIn -> \a],
+	lo: {|self|
+		self.updateSynth(0);
+	},
+	hi: {|self|
+		self.updateSynth(1);
+	},
+	updateSynth: {|self, index|
+		var gui = self.views;
+		self.switchSynthDef(index);
+		(gui.notNil.and(self.keepGuiUpdated)).if({
+			{ gui[\mode].value_(index); }.defer;
+		});
+	},
 	makeGui: {|self, parent, styles|
 		var style = styles ? Event.new,
 		ks = style.knobSize ? 50,

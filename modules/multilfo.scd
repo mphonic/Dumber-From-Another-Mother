@@ -31,6 +31,40 @@
 		})
 	],
 	outputConfig: Dictionary[\out -> \k],
+	tri: {|self|
+		self.updateSynth(0);
+	},
+	pulse: {|self|
+		self.updateSynth(1);
+	},
+	saw: {|self|
+		self.updateSynth(2);
+	},
+	sh: {|self|
+		self.updateSynth(3);
+	},
+	noise: {|self|
+		self.updateSynth(4);
+	},
+	dust: {|self|
+		self.updateSynth(5);
+	},
+	trigFF: {|self|
+		self.updateSynth(6);
+	},
+	trigRand: {|self|
+		self.updateSynth(7);
+	},
+	updateSynth: {|self, index|
+		var gui = self.views;
+		self.switchSynthDef(index);
+		(gui.notNil.and(self.keepGuiUpdated)).if({
+			{
+				gui[\synth].value_(index);
+				gui[\freq][0].enabled_(index < 6);
+			}.defer;
+		});
+	},
 	makeGui: {|self, parent, styles|
 		var style = styles ? Event.new,
 		ks = style.knobSize ? 50,
@@ -75,7 +109,7 @@
 			});
 		})
 		.value_(self.selectedSynthDef ? 0);
-		self.views[\synth] = [m];
+		self.views[\synth] = m;
 
 		style.viewWithTopLabel(view, ks@ks, "Freq", k);
 		self[\controls][\freq].get({|v| { k.value_(spec.unmap(v)) }.defer });

@@ -86,7 +86,8 @@
 	inputConfig: Dictionary[\fmIn -> \a, \envIn -> \a],
 	sync: {|self, source|
 		var sourceBus,
-		summers = source.modsummers ? Dictionary.new;
+		summers = source.modsummers ? Dictionary.new,
+		gui = self.views;
 		(summers[\freq].notNil).if({
 			sourceBus = source.modbusses[\freq][\out];
 		}, {
@@ -102,18 +103,48 @@
 			s.sync;
 			self.node.map(\basefreq, sourceBus);
 		}.fork;
+		(gui.notNil.and(self.keepGuiUpdated)).if({
+			(gui[\sync].notNil).if({
+				{ gui[\sync].value_(1); }.defer;
+			});
+		});
 	},
 	unsync: {|self, defIndex|
 		(self.syncedFrom.notNil).if({
-			var i = defIndex ? self.lastSelectedSynthDef;
+			var i = defIndex ? self.lastSelectedSynthDef,
+			gui = self.views;
 			self.switchSynthDef(i ? 0);
 			self.syncedFrom.syncedWith = nil;
 			self.syncedFrom = nil;
+			(gui.notNil.and(self.keepGuiUpdated)).if({
+				(gui[\sync].notNil).if({
+					{ gui[\sync].value_(0); }.defer;
+				});
+			});
 		});
 	},
 	handleSync: {|self, param|
 		(self.syncedWith.notNil && (param == \freq)).if({
 			self.syncedWith.sync(self);
+		});
+	},
+	tri: {|self|
+		self.updateSynth(0);
+	},
+	pulse: {|self|
+		self.updateSynth(1);
+	},
+	updateSynth: {|self, index|
+		var gui = self.views;
+		self.switchSynthDef(index);
+		self.unsync();
+		(gui.notNil.and(self.keepGuiUpdated)).if({
+			{
+				gui[\type].value_(index);
+				(gui[\sync].notNil).if({
+					gui[\sync].value_(0);
+				});
+			}.defer;
 		});
 	},
 	customDumpSettings: {|self, o, cb|
@@ -163,10 +194,10 @@
 		o = Button(bounds: bw@bh)
 		.states_([["/\\"], ["_|"]])
 		.action_({|v|
-			self.switchSynthDef(v.value);
-			self.unsync();
-			(self.views[\sync].notNil).if({
-				self.views[\sync].value_(0);
+			(v.value == 0).if({
+				self.tri();
+			}, {
+				self.pulse();
 			});
 		})
 		.value_((self.syncedFrom.isNil).if(

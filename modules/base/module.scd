@@ -227,11 +227,13 @@
 		(gui.notNil).if({
 			var view = (gui.isArray).if({ gui[0] }, { gui }),
 			spec = (gui.isArray).if({ gui[1] }, { nil });
-			(spec.notNil).if({
-				view.value_(spec.unmap(value));
-			}, {
-				view.value_(value);
-			});
+			{
+				(spec.notNil).if({
+					view.value_(spec.unmap(value));
+				}, {
+					view.value_(value);
+				});
+			}.defer;
 		});
 	},
 	updateGui: {|self|

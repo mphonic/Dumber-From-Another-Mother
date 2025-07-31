@@ -1,4 +1,4 @@
-(
+( // ONLY RUN THIS IF DFAM ISN'T ALREADY RUNNING
 (Document.current.dir ++ "/sc-dfam.scd").loadPaths;
 ~makeADfam.value({|d| ~dfam = d });
 )
@@ -7,8 +7,6 @@
 // or
 // ~dfam.loadSettings(Document.current.dir ++ "/presets/dyowng");
 ~dfam.makeGui();
-~dfam.syncGui();
-~dfam.stopSyncGui();
 
 MIDIIn.connectAll;
 
@@ -85,4 +83,3 @@ MIDIdef.cc(\dfamcc, {|val, num, chan, src|
 )
 
 MIDIdef.freeAll
-~dfam.stopSyncGui();

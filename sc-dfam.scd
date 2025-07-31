@@ -134,7 +134,6 @@
 			~seq.setTrigFunc({|msg|
 				groups.envs.set(\t_gate, 1)
 			});
-			~sortedModules.add(~seq);
 
 			s.sync;
 			"Synths started".postln;
