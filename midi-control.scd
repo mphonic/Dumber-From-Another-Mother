@@ -22,13 +22,11 @@ noteOn = {|num, val, doTrig = false|
 	m = num.midicps,
 	d = num - 60 * ~keytrack;
 
-	s.bind({
-		i.osc1.setParams(\freq, m);
-		i.osc2.setParams(\freq, m);
-		val !? { i.v.setParams(\amp, val.linlin(0, 127, -96 * ~velocitySensitivity, 0).dbamp); };
-		i.filt.setParams(\ffreqmul, d.midiratio);
-		(doTrig).if({ i.trigger() });
-	});
+	i.osc1.setParams(\freq, m);
+	i.osc2.setParams(\freq, m);
+	val !? { i.v.setParams(\amp, val.linlin(0, 127, -96 * ~velocitySensitivity, 0).dbamp); };
+	i.filt.setParams(\ffreqmul, d.midiratio);
+	(doTrig).if({ i.trigger() });
 };
 
 MIDIdef.noteOn(\dfamkeyson, {|val, num, chan, src|
@@ -65,19 +63,15 @@ MIDIdef.cc(\dfamcc, {|val, num, chan, src|
 	switch(num)
 	{ 1 } {
 		var v = val / 127;
-		s.bind({
-			i.osc1.setParams(\fmLevel, v);
-			i.osc2.setParams(\fmLevel, v);
-		});
+		i.osc1.setParams(\fmLevel, v);
+		i.osc2.setParams(\fmLevel, v);
 	}
 	{ 74 } { i.filt.setParams(\ffreq, val.linexp(0, 127, 20, 20000.0)) }
 	{ 75 } { i.filtEnv.setParams(\dec, val.linlin(0, 127, 0, 3.0)) }
 	{ 76 } {
-		s.bind({
-			var v = val.linlin(0, 127, 0, 3.0);
-			i.osc1Env.setParams(\dec, v);
-			i.osc2Env.setParams(\dec, v);
-		});
+		var v = val.linlin(0, 127, 0, 3.0);
+		i.osc1Env.setParams(\dec, v);
+		i.osc2Env.setParams(\dec, v);
 	}
 });
 )

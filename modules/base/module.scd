@@ -190,18 +190,21 @@
 	setParams: {|...args|
 		var self = args.removeAt(0),
 		a = Dictionary.newFrom(args);
-		s.bind({
-			a.keys.do({|key|
-				var c = self.controls[key];
-				(c.notNil).if({
-					var chan = c.numChannels;
-					(chan < 2).if({ c.set(a[key]); }, { c.setn(a[key]) });
-				}, {
-					self.node.set(key, a[key]);
+		a.keys.do({|key|
+			var c = self.controls[key];
+			(c.notNil).if({
+				var chan = c.numChannels;
+				(chan < 2).if({
+					c.set(a[key]);
+				},
+				{
+					c.setn(a[key]);
 				});
-				(self.keepGuiUpdated).if({
-					{ self.updateView(key, a[key]) }.defer;
-				});
+			}, {
+				self.node.set(key, a[key]);
+			});
+			(self.keepGuiUpdated).if({
+				{ self.updateView(key, a[key]) }.defer;
 			});
 		});
 	},

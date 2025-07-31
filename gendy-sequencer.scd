@@ -29,14 +29,12 @@ o = OSCFunc({|msg|
 	+ 42).midicps,
 	a = v.squared,
 	g = (a > 0.1).if({ 1 }, { 0 });
-	s.bind({
-		~dfam.osc1.setParams(\freq, f);
-		~dfam.osc2.setParams(\freq, f);
-		~dfam.filt.setParams(\ffreq, f * a.linlin(0.0, 1.0, 2, 6.0));
-		~dfam.v.setParams(\amp, a);
-		~dfam.out.setParams(\pan, rrand(-1.0, 1.0));
-		~dfam.groups.envs.set(\t_gate, g);
-	});
+	~dfam.osc1.setParams(\freq, f);
+	~dfam.osc2.setParams(\freq, f);
+	~dfam.filt.setParams(\ffreq, f * a.linlin(0.0, 1.0, 2, 6.0));
+	~dfam.v.setParams(\amp, a);
+	~dfam.out.setParams(\pan, rrand(-1.0, 1.0));
+	~dfam.trigger();
 }, '/xseq');
 )
 // In the GUI, move the active "p" knob to detune oscs
