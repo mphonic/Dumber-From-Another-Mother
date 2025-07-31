@@ -16,22 +16,14 @@
 
 // Lil bit o' latency never hurt no one
 ( // First DFAM plays and causes second to advance
+o.free;
 o = OSCFunc({|msg|
 	var v = msg[msg.size - 2],
 	a = msg[msg.size - 1];
 	(msg[1] == ~dfam1.seq.node.nodeID).if({
-		(v > -0.7).if({
-			s.bind({
-				(a.notNil).if({
-					(a < 1).if({
-						~dfam2.trigger();
-						~dfam2.seq.advanceSeq();
-					});
-				}, {
-					~dfam2.trigger();
-					~dfam2.seq.advanceSeq();
-				});
-			});
+		s.bind({
+			~dfam2.seq.trigger();
+			~dfam2.seq.advanceSeq();
 		});
 	});
 }, '/dfamseq');
@@ -50,18 +42,9 @@ o = OSCFunc({|msg|
 	a = msg[msg.size - 1];
 	(msg[1] == ~dfam1.seq.node.nodeID).if({
 		(count.even).if({
-			(v > -0.7).if({
-				s.bind({
-					(a.notNil).if({
-						(a < 1).if({
-							~dfam2.trigger();
-							~dfam2.seq.advanceSeq();
-						});
-					}, {
-						~dfam2.trigger();
-						~dfam2.seq.advanceSeq();
-					});
-				});
+			s.bind({
+				~dfam2.seq.trigger();
+				~dfam2.seq.advanceSeq();
 			});
 		});
 		count = count + 1;
@@ -83,18 +66,9 @@ o = OSCFunc({|msg|
 	a = msg[msg.size - 1];
 	(msg[1] == ~dfam1.seq.node.nodeID).if({
 		(count % 3 == 0).if({
-			(v > -0.7).if({
-				s.bind({
-					(a.notNil).if({
-						(a < 1).if({
-							~dfam2.trigger();
-							~dfam2.seq.advanceSeq();
-						});
-					}, {
-						~dfam2.trigger();
-						~dfam2.seq.advanceSeq();
-					});
-				});
+			s.bind({
+				~dfam2.seq.trigger();
+				~dfam2.seq.advanceSeq();
 			});
 			beats = beats + 1;
 			// uncomment to reset 2 after 7 steps

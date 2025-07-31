@@ -136,7 +136,7 @@ extension = (
 		.visible_((pin.value > 0).and(pou.value > 0));
 		v;
 	},
-	makeGui: {|self, parent, mods = 1, excludeInputs|
+	makeGui: {|self, parent, mods = 1, excludeInputs, excludeOutputs|
 		var o = sortModules.value(self.modulators, self.io[\outputs])
 		.collect({|v| v.asSymbol }),
 		i = sortModules.value(self.modules, self.io[\inputs])
@@ -157,6 +157,13 @@ extension = (
 			i = i.select({|v| excludeInputs.includes(v).not });
 			patches = patches.select({|v|
 				excludeInputs.includes(v[\inputKey].asSymbol).not
+			});
+		});
+		(excludeOutputs.notNil).if({
+			excludeOutputs = excludeOutputs.collect({|v| v.asSymbol });
+			o = o.select({|v| excludeOutputs.includes(v).not });
+			patches = patches.select({|v|
+				excludeOutputs.includes(v[\outputKey].asSymbol).not
 			});
 		});
 		self.views = Dictionary.new;

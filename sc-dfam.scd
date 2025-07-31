@@ -198,10 +198,14 @@
 								'O2 pitchmod',
 								'F ffreqmul',
 								'A amp',
-								'SE p',
-								'SE v',
+								'SE pitch',
+								'SE velocity',
+								'SE step',
 								'SE play',
 								'O pan'
+							],
+							[
+								'SE tk'
 							]
 						)
 					},
