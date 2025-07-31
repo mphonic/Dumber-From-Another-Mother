@@ -151,7 +151,7 @@ extension = (
 		f.nextLine;
 
 		// ignore t_ and i_ rate inputs
-		i = i.select({|v| " t_".matchRegexp(v.asString).not });
+		i = i.select({|v| " (t_|i_)".matchRegexp(v.asString).not });
 		(excludeInputs.notNil).if({
 			excludeInputs = excludeInputs.collect({|v| v.asSymbol });
 			i = i.select({|v| excludeInputs.includes(v).not });
