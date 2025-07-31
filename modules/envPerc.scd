@@ -66,6 +66,23 @@
 		self.views[\view] = view;
 		view;
 	},
+	updateView: {|self, key, value|
+		var views = self.views ? Dictionary.new,
+		gui = views[key];
+		(gui.notNil).if({
+			var view = (gui.isArray).if({ gui[0] }, { gui }),
+			spec = (gui.isArray).if({ gui[1] }, { nil });
+			((view.class != Button).and(key != 'att')).if({
+				(spec.notNil).if({
+					view.value_(spec.unmap(value));
+				}, {
+					view.value_(value);
+				});
+			}, {
+				view.value_((value < 0.1).if({ 0 }, { 1 }));
+			});
+		});
+	},
 	syncGui: {|self|
 		(self.guiTask.notNil).if({
 			(self.guiTask.isPlaying.not).if({ self.guiTask.play });
