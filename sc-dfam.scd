@@ -332,8 +332,6 @@
 
 				self.guiWindow = w;
 
-				w.onClose_({ self.seq.guiOsc.free });
-
 				CmdPeriod.doOnce { w.close };
 				w.view.palette_(QPalette.dark);
 				self.sortedModules.do({|e|
