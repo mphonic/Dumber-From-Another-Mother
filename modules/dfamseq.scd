@@ -91,7 +91,10 @@
 		self[\controls][\pitch].set(self.pitches[step]);
 		self[\controls][\velocity].set(v);
 		self.node.set(\t_trig, 1);
-		(v > - 0.7).if({ self.trigFunc(); });
+		((v > - 0.7)
+			.or(self.seqTask.isPlaying.not)).if(
+			{ self.trigFunc(); }
+		);
 	},
 	setTrigFunc: {|self, trigFunc|
 		self.trigFunc = trigFunc;
