@@ -16,7 +16,8 @@
 ~settings1.keys.postln;
 
 // Set settings from a dictionary:
-~dfam.setFromSettings(dictionary, settingsName);
+// ~dfam.setFromSettings(dictionary, settingsName), e.g.
+~dfam.setFromSettings(~settings1, "mysettingsname");
 // You could use the above if you want to store a bunch of settings in variables (using, e.g., setting = Object.readTextArchive("/path/to/setting")) and cycle through them without reading from disk each time
 
 // Open a gui:
