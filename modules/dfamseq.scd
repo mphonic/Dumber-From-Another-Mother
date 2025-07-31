@@ -95,12 +95,13 @@
 	trigger: {|self|
 		var step = self.currentStep;
 		s.bind({
+			v = self.velocities[step];
 			self.setParams(
 				\pitch, self.pitches[step],
-				\velocity, self.velocities[step],
+				\velocity, v,
 				\t_trig, 1
 			);
-			self.trigFunc();
+			(v > - 0.7).if({ self.trigFunc(); });
 		});
 	},
 	setTrigFunc: {|self, trigFunc|
