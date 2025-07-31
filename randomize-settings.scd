@@ -181,7 +181,7 @@ var count = 0;
 o.free;
 // Uncomment if you want select from the settings array
 // ~selectASetting.value;
-// ~dfam.seq.startSeq(true);
+~dfam.seq.startSeq(true);
 o = OSCFunc({|msg|
 	(count % 8 == 0).if({
 		{ ~nudge.value(0.1, ~allModules.select({|v| v != \seq }), true); }.defer;
