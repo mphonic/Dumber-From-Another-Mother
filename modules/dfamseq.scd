@@ -40,43 +40,29 @@
 	runningTempo: 0.25,
 	startTasks: {|self|
 		(self.seqTask.isNil).if({ self.createSeqTask() });
-		(self.tempoTask.isNil).if({ self.createTempoTask() });
 		self.seqTask.start;
-		self.tempoTask.start;
 	},
 	pauseTasks: {|self|
 		(self.seqTask.isNil).if({ self.createSeqTask() });
-		(self.tempoTask.isNil).if({ self.createTempoTask() });
 		self.seqTask.pause;
-		self.tempoTask.pause;
 	},
 	createSeqTask: {|self|
+		var cond = Condition(false);
 		self.seqTask = Task({
-			var checkInterval = 0.0025;
+			var start = 0, end = 0;
 			loop {
 				var count = 0,
 				cur = self.currentStep,
 				prev = self.previousStep;
+
 				self.trigger();
 				(self.views.notNil).if({
 					self.updateActiveStepView(prev, cur);
 				});
-				// Try to catch tempo modulations
-				while({ count < self.runningTempo }, {
-					count = count + checkInterval;
-					checkInterval.wait;
-				});
-				self.previousStep = self.currentStep;
-				self.currentStep = self.currentStep + 1 % 8;
-			}
-		}, SystemClock)
-	},
-	createTempoTask: {|self|
-		var cond = Condition.new(false);
-		self.tempoTask = Task({
-			loop {
-				var b = self[\outputs][\tkOut];
-				b.get({|v|
+
+				start = SystemClock.seconds;
+				s.sync;
+				self[\outputs][\tkOut].get({|v|
 					self.runningTempo = (v.notNil.and(v > 0)).if({
 						v.reciprocal;
 					}, {
@@ -86,23 +72,26 @@
 					cond.signal;
 				});
 				cond.wait;
-				0.04.wait;
+				end = SystemClock.seconds;
+				(self.runningTempo < (end - start)).if({
+					["seq late", end - start].postln;
+				});
+				(self.runningTempo - (end - start)).max(0.0001).wait;
 				cond.test = false;
 				cond.signal;
+				self.previousStep = self.currentStep;
+				self.currentStep = self.currentStep + 1 % 8;
 			}
-		}, SystemClock);
+		}, SystemClock)
 	},
 	trigger: {|self|
-		var step = self.currentStep;
-		s.bind({
-			v = self.velocities[step];
-			self.setParams(
-				\pitch, self.pitches[step],
-				\velocity, v,
-				\t_trig, 1
-			);
-			(v > - 0.7).if({ self.trigFunc(); });
-		});
+		var step = self.currentStep,
+		v = self.velocities[step];
+
+		self[\controls][\pitch].set(self.pitches[step]);
+		self[\controls][\velocity].set(v);
+		self.node.set(\t_trig, 1);
+		(v > - 0.7).if({ self.trigFunc(); });
 	},
 	setTrigFunc: {|self, trigFunc|
 		self.trigFunc = trigFunc;
