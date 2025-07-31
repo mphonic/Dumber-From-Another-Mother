@@ -21,10 +21,8 @@ o = OSCFunc({|msg|
 	var v = msg[msg.size - 2],
 	a = msg[msg.size - 1];
 	(msg[1] == ~dfam1.seq.node.nodeID).if({
-		s.bind({
-			~dfam2.seq.trigger();
-			~dfam2.seq.advanceSeq();
-		});
+		~dfam2.seq.trigger();
+		~dfam2.seq.advanceSeq();
 	});
 }, '/dfamseq');
 s.bind({
@@ -42,10 +40,8 @@ o = OSCFunc({|msg|
 	a = msg[msg.size - 1];
 	(msg[1] == ~dfam1.seq.node.nodeID).if({
 		(count.even).if({
-			s.bind({
-				~dfam2.seq.trigger();
-				~dfam2.seq.advanceSeq();
-			});
+			~dfam2.seq.trigger();
+			~dfam2.seq.advanceSeq();
 		});
 		count = count + 1;
 	});
@@ -66,13 +62,11 @@ o = OSCFunc({|msg|
 	a = msg[msg.size - 1];
 	(msg[1] == ~dfam1.seq.node.nodeID).if({
 		(count % 3 == 0).if({
-			s.bind({
-				~dfam2.seq.trigger();
-				~dfam2.seq.advanceSeq();
-			});
+			~dfam2.seq.trigger();
+			~dfam2.seq.advanceSeq();
 			beats = beats + 1;
 			// uncomment to reset 2 after 7 steps
-			// (beats % 7 == 0).if({ ~dfam2.seq.node.set(\t_reset, 1); });
+			// (beats % 7 == 0).if({ ~dfam2.seq.resetSeq(); });
 		});
 		count = count + 1;
 	});
