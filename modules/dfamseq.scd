@@ -17,7 +17,7 @@
 		tkOut = 34|
 		var p = pitch,
 		v = velocity;
-		SendReply.kr(t_trig, '/dfamseq', [step, pitch, velocity]);
+		SendReply.ar(K2A.ar(t_trig), '/dfamseq', [step, pitch, velocity]);
 		Out.ar(pOut, K2A.ar(p));
 		Out.ar(vOut, K2A.ar(v));
 		Out.kr(pkOut, p);

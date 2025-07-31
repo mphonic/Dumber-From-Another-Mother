@@ -131,6 +131,9 @@ extension = (
 			self.unpatch(output.asString, id);
 			pin.value_(0);
 			pou.value_(0);
+			input = nil;
+			output = nil;
+			id = nil;
 			v.visible_(false);
 		})
 		.visible_((pin.value > 0).and(pou.value > 0));
