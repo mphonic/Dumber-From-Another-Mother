@@ -49,7 +49,7 @@
 	createSeqTask: {|self|
 		var cond = Condition(false);
 		self.seqTask = Task({
-			var start = 0, end = 0;
+			var start = 0, end = 0, diff;
 			loop {
 				var count = 0,
 				cur = self.currentStep,
@@ -73,10 +73,11 @@
 				});
 				cond.wait;
 				end = SystemClock.seconds;
-				(self.runningTempo < (end - start)).if({
+				diff = end - start;
+				(self.runningTempo < diff).if({
 					["seq late", end - start].postln;
 				});
-				(self.runningTempo - (end - start)).max(0.0001).wait;
+				(self.runningTempo - diff).max(0).wait;
 				cond.test = false;
 				cond.signal;
 				self.previousStep = self.currentStep;
