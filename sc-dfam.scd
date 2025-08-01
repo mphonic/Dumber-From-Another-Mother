@@ -142,7 +142,7 @@
 			~modPod = ~controlPatchbay.create(~sortedModules, envs.modules);
 			s.sync;
 
-			~makeGui = {|self, bounds, keepUpdated|
+			~makeGui = {|self, bounds, keepUpdated, knobMode = \vert|
 				var w = Window("dfam", bounds ? Rect(80, 250, 1090, 553)),
 				pl = self.style.paddingLeft ? 20,
 				pt = self.style.paddingTop ? 20,
@@ -185,7 +185,9 @@
 				o2m,
 				gui;
 
+				knobMode = knobMode ? self.knobMode ? \vert;
 				keepUpdated = keepUpdated ? self.keepGuiUpdated ? true;
+				Knob.defaultMode_(knobMode);
 
 				gui = (
 					matrix: { self.patcher.makeGui(pv, nil, ["O"]) },

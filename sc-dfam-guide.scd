@@ -23,10 +23,11 @@
 // Open a gui:
 ~dfam.makeGui();
 /*
-.makeGui(bounds: nil, keepUpdated: true);
+.makeGui(bounds: nil, keepUpdated: true, knobMode: \vert);
 args:
 bounds - nil or an instance of Rect
 keepUpdated - boolean, determines whether setParams on any module will also update the gui
+knobMode - default mode for all Knobs
 */
 
 // Trigger all of the envelopes:
