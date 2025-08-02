@@ -1,7 +1,9 @@
 # SC DFAM
 ## Dumber from Another Mother
 
-A SuperCollider instrument inspired by the [Moog DFAM](https://www.moogmusic.com/synthesizers/dfam/). It's similar, but it's... more. More modules, more patching, more modulation, more idiosyncrasies. 
+A SuperCollider instrument inspired by the [Moog DFAM](https://www.moogmusic.com/synthesizers/dfam/). It's similar, but it's... more. More modules, more patching, more modulation, more idiosyncrasies.
+
+![Screenshot of Dumber from Another Mother](https://github.com/mphonic/SC-DFAM/blob/master/images/dumber-gui.png)
 
 # Donate
 [Venmo](https://account.venmo.com/u/Bhob-Rainey)
