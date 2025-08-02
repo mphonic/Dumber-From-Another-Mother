@@ -55,6 +55,6 @@ Much more documentation coming soon... (See [Donate](#donate) to help carve out 
 See the `midi-control.scd` file for an example. You can use a keyboard, set legato, keytrack, and velocity sensitivity. You can map cc to different parameters. Of course you can.
 
 ## Controlling with SC Code
-There are a few code examples that show how the DFAM can be controlled with regular Supercollider programming. See `probability-sequence.scd`, `randomize-settings.scd`, `stutter.scd`, `gendy-sequence.scd`, and `two-dfams.scd`.  
+There are a few code examples that show how the DFAM can be controlled with regular Supercollider programming. See `probability-sequence.scd`, `randomize-settings.scd`, `stutter.scd`, `gendy-sequence.scd`, `dumb-machine.scd`, and `two-dfams.scd`.  
 
 For more granular detail, see `sc-dfam-guide.scd`.
