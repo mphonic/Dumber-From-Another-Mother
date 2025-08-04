@@ -8,7 +8,7 @@
 			Out.kr(out, LFTri.kr(freq));
 		}),
 		SynthDef(\lfpulse, {|freq = 4, out = 0|
-			Out.kr(out, LFPulse.kr(freq));
+			Out.kr(out, LFPulse.kr(freq, mul: 2, add: -1));
 		}),
 		SynthDef(\lfsaw, {|freq = 4, out = 0|
 			Out.kr(out, LFSaw.kr(freq));
