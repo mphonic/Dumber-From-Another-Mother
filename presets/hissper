@@ -17,8 +17,8 @@ o = [
 	Array.prNew(16),  "MN",  "N",  Dictionary.prNew,  
 	Array.prNew(16),  "SE v",  Dictionary.prNew,  Array.prNew(16),  
 	"M2",  "O2",  Dictionary.prNew,  Array.prNew(16),  
+	"A env",  "EA",  Dictionary.prNew,  Array.prNew(16),  
 	"F",  "M2",  Dictionary.prNew,  Array.prNew(16),  
-	Dictionary.prNew,  Array.prNew(16),  "A env",  "EA",  
 	Dictionary.prNew,  Array.prNew(16),  "A",  "F",  
 	Dictionary.prNew,  Array.prNew(16),  "O2 fm",  Dictionary.prNew,  
 	Array.prNew(16),  "O",  "A",  Dictionary.prNew,  
@@ -99,14 +99,14 @@ p = [
 		nil,  nil,  nil,  nil,  
 		nil,  nil,  nil,  nil ],  
 	// Dictionary
-	8, [ array: o[9],  size: 4 ],  
+	8, [ array: o[9],  size: 7 ],  
 	// Array
 	9, [ nil,  nil,  nil,  nil,  
-		nil,  nil,  nil,  nil,  
-		nil,  nil,  'v',  o[10],  
-		'play',  0.0,  nil,  nil,  
-		nil,  nil,  'p',  o[11],  
-		nil,  nil,  'tempo',  2.6308867931366,  
+		nil,  nil,  'velocity',  -1.0,  
+		'pitch',  1.0,  'play',  0.0,  
+		'v',  o[10],  nil,  nil,  
+		nil,  nil,  'step',  0.0,  
+		'p',  o[11],  'tempo',  2.6308867931366,  
 		nil,  nil,  nil,  nil,  
 		nil,  nil,  nil,  nil ],  
 	// Array
@@ -149,14 +149,14 @@ p = [
 		nil,  nil,  nil,  nil,  
 		nil,  nil,  nil,  nil ],  
 	// Dictionary
-	18, [ array: o[19],  size: 6 ],  
+	18, [ array: o[19],  size: 7 ],  
 	// Array
 	19, [ nil,  nil,  'selectedSynthDef',  1,  
 		'ffreq',  9261.482421875,  nil,  nil,  
 		nil,  nil,  nil,  nil,  
-		'amp',  1.0,  'res',  0.24678747355938,  
+		'amp',  1.0,  'res',  0.36678746342659,  
 		nil,  nil,  'envLevel',  0.49369737505913,  
-		'fmLevel',  0.66677969694138,  nil,  nil,  
+		'fmLevel',  0.66677969694138,  'ffreqmul',  1.0,  
 		nil,  nil,  nil,  nil,  
 		nil,  nil,  nil,  nil ],  
 	// List
@@ -165,7 +165,7 @@ p = [
 	21, [ o[22],  o[26],  o[30],  o[33],  
 		o[36],  o[40],  o[44],  o[48],  
 		o[51],  o[55],  o[59],  o[62],  
-		o[66],  o[70],  o[72],  o[76],  
+		o[66],  o[70],  o[74],  o[76],  
 		o[80],  o[83] ],  
 	// Dictionary
 	22, [ array: o[23],  size: 4 ],  
@@ -262,16 +262,16 @@ p = [
 	70, [ array: o[71],  size: 4 ],  
 	// Array
 	71, [ nil,  nil,  nil,  nil,  
+		'inputKey',  o[72],  'add',  0.0,  
+		'mul',  1.0,  nil,  nil,  
+		'outputKey',  o[73],  nil,  nil ],  
+	// Dictionary
+	74, [ array: o[75],  size: 4 ],  
+	// Array
+	75, [ nil,  nil,  nil,  nil,  
 		'inputKey',  o[32],  'add',  0.0,  
 		'mul',  1.0,  nil,  nil,  
-		'outputKey',  o[69],  nil,  nil ],  
-	// Dictionary
-	72, [ array: o[73],  size: 4 ],  
-	// Array
-	73, [ nil,  nil,  nil,  nil,  
-		'inputKey',  o[74],  'add',  0.0,  
-		'mul',  1.0,  nil,  nil,  
-		'outputKey',  o[75],  nil,  nil ],  
+		'outputKey',  o[73],  nil,  nil ],  
 	// Dictionary
 	76, [ array: o[77],  size: 4 ],  
 	// Array

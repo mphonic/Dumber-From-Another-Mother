@@ -55,7 +55,7 @@
 			filt = BHiPass4.ar(
 				signalInput,
 				ffreq.ring1(fm).max(20).min(20000),
-				res.linexp(0.0, 1.0, 1.0, 0.01),
+				res.linlin(0.0, 1.0, 1.0, 0.01),
 				mul: amp
 			);
 			Out.ar(out, filt);

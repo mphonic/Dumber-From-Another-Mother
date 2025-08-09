@@ -20,7 +20,7 @@
 			]);
 			freq = Select.ar(fm < 0, [
 				fm.linexp(0.0, 1.0, freq, 20000.0),
-				fm.linexp(-1.0, 0.0, 20.0, freq)
+				fm.linexp(-1.0, 0.0, 20.0.min(freq), freq)
 			]).lag(0.01);
 			freq = freq * (pitchmod - 1 * 72).midiratio;
 			sig = VarSaw.ar(
@@ -46,7 +46,7 @@
 			]);
 			freq = Select.ar(fm < 0, [
 				fm.linexp(0.0, 1.0, freq, 20000.0),
-				fm.linexp(-1.0, 0.0, 20.0, freq)
+				fm.linexp(-1.0, 0.0, 20.0.min(freq), freq)
 			]).lag(0.01);
 			freq = freq * (pitchmod - 1 * 72).midiratio;
 			sig = Pulse.ar(
