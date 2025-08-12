@@ -18,6 +18,7 @@
 				In.ar(fmIn, 1) * fmLevel,
 				In.ar(envIn, 1) * envLevel
 			]);
+			freq = freq.max(0.01);
 			freq = Select.ar(fm < 0, [
 				fm.linexp(0.0, 1.0, freq, 20000.0),
 				fm.linexp(-1.0, 0.0, 20.0.min(freq), freq)
@@ -44,6 +45,7 @@
 				In.ar(fmIn, 1) * fmLevel,
 				In.ar(envIn, 1) * envLevel
 			]);
+			freq = freq.max(0.01);
 			freq = Select.ar(fm < 0, [
 				fm.linexp(0.0, 1.0, freq, 20000.0),
 				fm.linexp(-1.0, 0.0, 20.0.min(freq), freq)
@@ -70,6 +72,7 @@
 				In.ar(fmIn, 1) * fmLevel,
 				In.ar(envIn, 1) * envLevel
 			]);
+			freq = freq.max(0.01);
 			freq = Select.ar(fm < 0, [
 				fm.linexp(0.0, 1.0, freq, 20000.0),
 				fm.linexp(-1.0, 0.0, basefreq, freq)

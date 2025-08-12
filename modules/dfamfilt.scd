@@ -20,6 +20,7 @@
 				In.ar(fmIn, 1) * fmLevel,
 				In.ar(envIn, 1) * envLevel
 			]);
+			ffreq = ffreq.max(20);
 			ffreq = Select.ar(fm < 0, [
 				fm.linexp(0.0, 1.0, ffreq, 20000.0),
 				fm.linexp(-1.0, 0.0, 20.0, ffreq)
@@ -48,6 +49,7 @@
 				In.ar(fmIn, 1) * fmLevel,
 				In.ar(envIn, 1) * envLevel
 			]);
+			ffreq = ffreq.max(20);
 			ffreq = Select.ar(fm < 0, [
 				fm.linexp(0.0, 1.0, ffreq, 20000.0),
 				fm.linexp(-1.0, 0.0, 20.0, ffreq)
