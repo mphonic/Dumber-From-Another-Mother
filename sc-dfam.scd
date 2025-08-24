@@ -229,8 +229,8 @@
 				Button(dv, 75@20)
 				.states_([["Donate"]])
 				.action_({
-					"open https://github.com/mphonic/SC-DFAM/blob/master/README.md#donate".unixCmd();
-"explorer https://github.com/mphonic/SC-DFAM/blob/master/README.md#donate".unixCmd();
+					"open https://github.com/mphonic/Dumber-From-Another-Mother/blob/master/README.md#donate".unixCmd();
+"explorer https://github.com/mphonic/Dumber-From-Another-Mother/blob/master/README.md#donate".unixCmd();
 				});
 
 				// load / save
