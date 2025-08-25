@@ -143,20 +143,27 @@
 			s.sync;
 
 			~makeGui = {|self, bounds, keepUpdated, knobMode = \vert|
-				var w = Window("dfam", bounds ? Rect(80, 250, 1090, 553)),
+				var b = bounds ? Rect(80, 250, 1090, 553),
+				w = Window("dfam", Rect(b.left, b.top, 1090, 553)),
 				pl = self.style.paddingLeft ? 20,
 				pt = self.style.paddingTop ? 20,
 				gl = self.style.gapLeft ? 4,
 				gt = self.style.gapTop ? 4,
 				f = w.addFlowLayout(pl@pt, gl@gt),
 				cvh = 220,
-				mc = View(w, w.bounds), // main container
+				mc = ((Window.screenBounds.width < 1090)
+					.or(Window.screenBounds.height < 553)
+				).if({
+					ScrollView(bounds: 1090@553)
+				}, {
+					View(bounds: 1090@553)
+				}), // main container
 				mf = mc.addFlowLayout(0@0, 0@0),
 
 				dv = View(mc, mc.bounds.width@28), // l / s buttons
 				df = dv.addFlowLayout(0@0, gl@gt),
 
-				cv = View(mc, 746@(w.bounds.height - 150)), // controls container
+				cv = View(mc, 746@(mc.bounds.height - 150)), // controls container
 				cf = cv.addFlowLayout(0@0, gl@gt),
 
 				pv = View(mc, 340@(cv.bounds.height)), // patch container
@@ -331,6 +338,8 @@
 
 				gui.matrix();
 				gui.modpod();
+
+				w.layout_(HLayout(mc));
 
 				self.guiWindow = w;
 
