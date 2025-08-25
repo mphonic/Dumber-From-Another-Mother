@@ -22,8 +22,6 @@ If you've successfully installed another of my Supercollider pieces, you probabl
 3. To find your Supercollider extensions folder (if the README file doesn't help), open Supercollider and enter `Platform.userExtensionDir.openOs`. Keep your cursor on the line with that code and hit shift-Return (Mac) or Shift-Enter. Your extensions folder should open up in your OS's file explorer.
 4. Move the unzipped SC3Plugins folder to the Extensions folder. 
 5. Quit and restart Supercollider. You should be good to go.
-
-If you're using a Mac and find that your OS has put extensions in "quarantine", you can open `unquarantine-mac-extensions.scd` and run the code there.
  
 If you followed instructions and wind up with an error akin to "Can't find MoogVCF", then you probably didn't quite succeed at installing sc3-plugins. 
 
